@@ -1,7 +1,78 @@
 // file: script.js
 
+document.addEventListener('DOMContentLoaded', () => {
+
+  // =========================
+  // ELEMENTOS
+  // =========================
+
+  const seal = document.getElementById('seal');
+  const flap = document.getElementById('flap');
+  const card = document.getElementById('card');
+  const scene = document.getElementById('scene');
+  const transitionScreen = document.getElementById('transition-screen');
+
+  const musica = document.getElementById('musicaFondo');
+  const sonido = document.getElementById('sonidoSobre');
+
+  let animando = false;
+
+  if (!seal) return;
+
+  // =========================
+  // CLICK SOBRE
+  // =========================
+
+  seal.addEventListener('click', () => {
+
+    if (animando) return;
+    animando = true;
+
+    // 🔊 sonido sobre
+    if (sonido) {
+      sonido.volume = 0.5;
+      sonido.play().catch(()=>{});
+    }
+
+    // 1. abrir solapa
+    flap.classList.add('is-opening');
+
+    // 2. sacar carta (efecto físico)
+    setTimeout(() => {
+      card.classList.add('is-lifted');
+    }, 800);
+
+    // 🎵 música
+    setTimeout(() => {
+      if (musica) {
+        musica.volume = 0.1;
+        musica.play().catch(()=>{});
+      }
+    }, 1000);
+
+    // 3. zoom escena
+    setTimeout(() => {
+      scene.classList.add('is-zooming');
+    }, 1600);
+
+    // 4. fade blanco
+    setTimeout(() => {
+      transitionScreen.classList.add('is-fading');
+    }, 2200);
+
+    // 5. mostrar tu página (scroll arriba)
+    setTimeout(() => {
+      document.body.style.overflow = "auto";
+      window.scrollTo(0, 0);
+    }, 3000);
+
+  });
+
+});
+
+
 // =========================
-// CONTADOR
+// CONTADOR (TU BODA)
 // =========================
 
 function actualizarCuentaAtras() {
@@ -22,8 +93,11 @@ function actualizarCuentaAtras() {
   document.getElementById("segundos").textContent = segundos.toString().padStart(2,"0");
 }
 
+setInterval(actualizarCuentaAtras, 1000);
+
+
 // =========================
-// MÚSICA
+// MÚSICA BOTÓN
 // =========================
 
 function controlarMusica() {
@@ -43,8 +117,9 @@ function controlarMusica() {
   }
 }
 
+
 // =========================
-// CARRUSEL PRO (SEGURO)
+// CARRUSEL (TUYO)
 // =========================
 
 let indiceCarrusel = 0;
@@ -76,52 +151,9 @@ function moverCarrusel(direccion) {
   actualizarCarrusel();
 }
 
-// =========================
-// SOBRE + SONIDO + SCROLL FIX
-// =========================
-
-function abrirSobre() {
-  const sobre = document.querySelector('.envelope');
-  const overlay = document.getElementById('overlay');
-  const sonido = document.getElementById('sonidoSobre');
-  const musica = document.getElementById('musicaFondo');
-
-  if (!sobre || !overlay) return;
-
-  sobre.classList.add('abierto');
-
-  // guardar estado
-  localStorage.setItem("sobreVisto", "true");
-
-  // sonido sobre
-  if (sonido) {
-    sonido.volume = 0.5;
-    sonido.play().catch(()=>{});
-  }
-
-  // música
-  setTimeout(() => {
-    if (musica) {
-      musica.volume = 0.1;
-      musica.play().catch(()=>{});
-    }
-  }, 600);
-
-  // fade overlay
-  setTimeout(() => {
-    overlay.style.opacity = '0';
-    document.body.classList.remove('no-scroll');
-  }, 800);
-
-  // ocultar overlay + scroll top
-  setTimeout(() => {
-    overlay.style.display = 'none';
-    window.scrollTo(0, 0);
-  }, 1500);
-}
 
 // =========================
-// INIT SEGURO
+// INIT GENERAL
 // =========================
 
 window.addEventListener("load", () => {
@@ -129,14 +161,7 @@ window.addEventListener("load", () => {
   actualizarCuentaAtras();
   actualizarCarrusel();
 
-  // sobre solo una vez
-  if (localStorage.getItem("sobreVisto") === "true") {
-    const overlay = document.getElementById("overlay");
-    if (overlay) overlay.style.display = "none";
-    document.body.classList.remove("no-scroll");
-  }
-
-  // swipe carrusel
+  // swipe móvil
   const carrusel = document.getElementById("carruselFotos");
 
   if (carrusel) {
@@ -153,10 +178,5 @@ window.addEventListener("load", () => {
       if (finX - inicioX > 40) moverCarrusel(-1);
     });
   }
-
-  // auto slide (opcional)
-  setInterval(() => {
-    moverCarrusel(1);
-  }, 4000);
 
 });
