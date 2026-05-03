@@ -6,114 +6,53 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Boda Jeshua & Angelli</title>
 
-<!-- FUENTES PREMIUM -->
+<link rel="stylesheet" href="style.css">
+
+<!-- FUENTES -->
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
 body {
-  margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: #fdfaf6;
-  color: #333;
-  scroll-behavior: smooth;
 }
-
 h1, h2, h3 {
   font-family: 'Playfair Display', serif;
 }
 
-/* NAV */
-nav {
-  display: flex;
-  justify-content: space-between;
-  padding: 15px 40px;
-  background: white;
-  position: sticky;
-  top: 0;
-}
-
-nav a {
-  text-decoration: none;
-  margin: 0 10px;
-  color: #333;
-}
-
-/* PORTADA */
-.portada {
-  text-align: center;
-  padding: 100px 20px;
-}
-
-.tarjeta-portada {
-  background: white;
-  padding: 50px;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
-
-/* ANIMACIÓN */
-.fade-in {
+/* ANIMACIÓN SUAVE */
+.animar {
   opacity: 0;
-  transform: translateY(30px);
-  animation: fadeIn 1.2s ease forwards;
+  transform: translateY(40px);
+  transition: all 1s ease;
+}
+.animar.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* BOTONES */
+/* BOTONES MÁS FINOS */
 .boton, .boton-portada {
-  background: #d4af37;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 10px;
-  text-decoration: none;
-  transition: 0.3s;
+  transition: 0.3s ease;
 }
-
 .boton:hover, .boton-portada:hover {
   transform: scale(1.05);
-  background: #c9a227;
-}
-
-/* DETALLES */
-.detalles {
-  text-align: center;
-  padding: 60px 20px;
 }
 
 /* PÉTALOS */
 .petalo {
   position: fixed;
   top: -10px;
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   background: pink;
   border-radius: 50%;
   opacity: 0.6;
   animation: caer linear infinite;
 }
-
 @keyframes caer {
   0% { transform: translateY(0); }
   100% { transform: translateY(100vh); }
-}
-
-/* BOTÓN MÚSICA */
-#botonMusica {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  padding: 12px;
-  border-radius: 50%;
-  border: none;
-  background: #d4af37;
-  color: white;
 }
 </style>
 
@@ -121,8 +60,8 @@ nav a {
 
 <body>
 
-<nav>
-  <a class="logo-privado" href="https://docs.google.com/spreadsheets/d/16ob_KtGP0o8lPybOJRXrYS-tIvXSdL5yiPvvIEunbf8/edit" target="_blank">J&A</a>
+<nav class="animar">
+  <a class="logo-privado" href="https://docs.google.com/spreadsheets/d/16ob_KtGP0o8lPybOJRXrYS-tIvXSdL5yiPvvIEunbf8/edit?gid=0#gid=0" target="_blank">J&A</a>
   <div>
     <a href="#inicio">Inicio</a>
     <a href="#historia">Historia</a>
@@ -132,49 +71,74 @@ nav a {
   </div>
 </nav>
 
-<section id="inicio" class="portada fade-in">
+<section id="inicio" class="portada animar">
   <div class="contenedor-portada">
 
 ```
-<img src="IMG_5777.PNG" width="200">
+<img class="foto-lateral foto-izquierda" src="IMG_5777.PNG" alt="Foto izquierda">
 
 <div class="tarjeta-portada">
+  <span class="decoracion">❦</span>
   <h1>Nos casamos</h1>
-  <p><strong>Jeshua & Angelli</strong></p>
-  <p>30 · MAYO · 2026</p>
+  <p class="nombres">Jeshua & Angelli</p>
+  <p class="fecha">30 · MAYO · 2026</p>
+  <p class="frase-portada">Nos encantaría que formaras parte de este día</p>
   <a class="boton-portada" href="#detalles">Ver detalles</a>
 </div>
 
-<img src="IMG_5777.PNG" width="200">
+<img class="foto-lateral foto-derecha" src="IMG_5777.PNG" alt="Foto derecha">
 ```
 
   </div>
 </section>
 
-<section id="historia" class="fade-in">
-  <h2>Nuestra historia</h2>
-  <p>Te elegí sin ruido, como florece la mañana.</p>
+<section id="historia" class="historia animar">
+  <div class="historia-contenido">
+
+```
+<div class="historia-texto">
+  <h2> comienza nuestra historia</h2>
+
+  <div class="poema-amor">
+    <p>Te elegí sin ruido,<br>como florece la mañana,<br>poco a poco,<br>llenándolo todo de luz.</p>
+    <p>Y en tus ojos encontré<br>un lugar donde quedarme,<br>un hogar sereno,<br>una vida compartida.</p>
+    <p>Si el amor tiene forma,<br>la nuestra está hecha<br>de abrazos, paciencia,<br>promesas y destino.</p>
+  </div>
+</div>
+
+<div class="historia-galeria">
+  <button class="flecha flecha-izquierda" onclick="moverCarrusel(-1)">&#10094;</button>
+
+  <div class="carrusel-fotos" id="carruselFotos">
+    <img src="IMG_5777.PNG" class="foto-carrusel activa">
+    <img src="IMG_5777.PNG" class="foto-carrusel">
+    <img src="IMG_5777.PNG" class="foto-carrusel">
+  </div>
+
+  <button class="flecha flecha-derecha" onclick="moverCarrusel(1)">&#10095;</button>
+</div>
+```
+
+  </div>
 </section>
 
-<section id="detalles" class="detalles fade-in">
-  <h2>Detalles</h2>
-  <p>30 mayo 2026 - 1:00 PM</p>
+<section id="detalles" class="detalles animar">
+  <h2>Detalles de la Boda</h2>
+
+  <div class="contador-detalles">
+    <div><strong id="dias">0</strong><span>Días</span></div>
+    <div><strong id="horas">0</strong><span>Horas</span></div>
+    <div><strong id="minutos">0</strong><span>Minutos</span></div>
+    <div><strong id="segundos">0</strong><span>Segundos</span></div>
+  </div>
 </section>
 
-<section id="programa" class="fade-in">
-  <h2>Programa</h2>
-  <p>Recepción - Protocolo - Fiesta</p>
-</section>
-
-<section id="ubicacion" class="fade-in">
+<section id="ubicacion" class="ubicacion animar">
   <h2>Ubicación</h2>
 
   <iframe 
     src="https://www.google.com/maps?q=Salon+Naturafrut+San+Pedro+Tapanatepec+Oaxaca&output=embed"
-    width="100%" 
-    height="300" 
-    style="border-radius:20px;" 
-    loading="lazy">
+    width="100%" height="300" style="border-radius:20px;" loading="lazy">
   </iframe>
 
 <br><br>
@@ -184,7 +148,7 @@ nav a {
   </a>
 </section>
 
-<footer class="fade-in">
+<footer class="animar">
   <p>JESHUA & ANGELLI</p>
 </footer>
 
@@ -192,20 +156,20 @@ nav a {
   <source src="https://raw.githubusercontent.com/francispain/boda-audio/main/paulyudin-romantic-wedding-piano-160698.mp3">
 </audio>
 
-<button id="botonMusica">♫</button>
+<button id="botonMusica" onclick="controlarMusica()">♫ Música</button>
+
+<script src="script.js"></script>
 
 <script>
-/* MÚSICA */
-let musica = document.getElementById("musicaFondo");
-document.getElementById("botonMusica").onclick = () => {
-  musica.paused ? musica.play() : musica.pause();
-};
-
-/* AUTO PLAY SUAVE */
-document.addEventListener("click", () => {
-  musica.volume = 0.3;
-  musica.play();
-}, { once: true });
+/* SCROLL ANIMATION */
+const els = document.querySelectorAll('.animar');
+window.addEventListener('scroll', () => {
+  els.forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight - 50) {
+      el.classList.add('visible');
+    }
+  });
+});
 
 /* PÉTALOS */
 for (let i = 0; i < 25; i++) {
