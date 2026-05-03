@@ -59,9 +59,10 @@ fetch(URL_GOOGLE_SHEETS, {
 
   window.open(`https://wa.me/34638063888?text=${encodeURIComponent(mensajeWhatsApp)}`, "_blank");
 }
+// file: script.js
 
 function actualizarCuentaAtras() {
-  const fechaBoda = new Date("October 9, 2026 18:45:00").getTime();
+  const fechaBoda = new Date("2026-05-30T13:00:00").getTime();
   const ahora = new Date().getTime();
   const diferencia = fechaBoda - ahora;
 
@@ -78,10 +79,10 @@ function actualizarCuentaAtras() {
   const minutos = Math.floor((diferencia / (1000 * 60)) % 60);
   const segundos = Math.floor((diferencia / 1000) % 60);
 
-  document.getElementById("dias").textContent = dias;
-  document.getElementById("horas").textContent = horas;
-  document.getElementById("minutos").textContent = minutos;
-  document.getElementById("segundos").textContent = segundos;
+  document.getElementById("dias").textContent = dias.toString().padStart(2, "0");
+  document.getElementById("horas").textContent = horas.toString().padStart(2, "0");
+  document.getElementById("minutos").textContent = minutos.toString().padStart(2, "0");
+  document.getElementById("segundos").textContent = segundos.toString().padStart(2, "0");
 }
 
 actualizarCuentaAtras();
