@@ -16,6 +16,34 @@
 body { font-family: 'Poppins', sans-serif; }
 h1,h2,h3 { font-family: 'Playfair Display', serif; }
 
+body.no-scroll {
+  overflow: hidden;
+}
+
+/* SOBRE FULL */
+.scene {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: #C2A8AB;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* REVELACIÓN */
+#contenido {
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+#contenido.visible {
+  opacity: 1;
+}
+
+/* ANIMACIONES */
 .animar {
   opacity: 0;
   transform: translateY(40px);
@@ -26,6 +54,7 @@ h1,h2,h3 { font-family: 'Playfair Display', serif; }
   transform: translateY(0);
 }
 
+/* PÉTALOS */
 .petalo {
   position: fixed;
   top: -10px;
@@ -56,7 +85,7 @@ h1,h2,h3 { font-family: 'Playfair Display', serif; }
 
     <div class="layer env-card" id="card">
       <div class="card-content">
-        <p class="card-pre olive-text">Nuestra boda</p>
+        <p class="card-pre olive-text">Save the Date</p>
         <h2 class="card-title olive-text">J & A</h2>
       </div>
     </div>
@@ -77,13 +106,7 @@ h1,h2,h3 { font-family: 'Playfair Display', serif; }
     <div class="layer flap-wrapper env-flap-main" id="flap">
       <div class="flap-shape flap-right"></div>
 
-      <div class="wax-seal" id="seal">
-        <div class="wax-seal-inner">
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 21.5c-1.5 0-3-.5-4.5-1.5-2-1.5-4.5-5-5-10 0-1.5.5-2.5 1.5-3.5 1.5-1.5 3-2 5-2 .5 0 1 .5 1.5 1 .5.5 1 1 1.5 2 1-1.5 2-3 3.5-3 2 0 3.5.5 5 2 1 1 1.5 2 1.5 3.5-.5 5-3 8.5-5 10-1.5 1-3 1.5-4.5 1.5z"/>
-          </svg>
-        </div>
-      </div>
+      <div class="wax-seal" id="seal"></div>
     </div>
 
   </div>
@@ -92,8 +115,10 @@ h1,h2,h3 { font-family: 'Playfair Display', serif; }
 <div class="transition-screen" id="transition-screen"></div>
 
 <!-- ========================= -->
-<!-- NAV -->
+<!-- CONTENIDO REAL -->
 <!-- ========================= -->
+
+<div id="contenido">
 
 <nav class="animar">
   <a class="logo-privado">J&A</a>
@@ -106,70 +131,68 @@ h1,h2,h3 { font-family: 'Playfair Display', serif; }
   </div>
 </nav>
 
-<!-- ========================= -->
-<!-- PORTADA -->
-<!-- ========================= -->
-
 <section id="inicio" class="portada animar">
   <div class="contenedor-portada">
-    <img class="foto-lateral" src="IMG_4879.jpeg">
+
+    <img class="foto-lateral foto-izquierda" src="IMG_4879.jpeg">
+
     <div class="tarjeta-portada">
       <h1>Nos casamos</h1>
       <p class="nombres">Jeshua & Angelli</p>
       <p class="fecha">30 · MAYO · 2026</p>
+      <p class="frase-portada">Nos encantaría que formaras parte de este día</p>
     </div>
-    <img class="foto-lateral" src="IMG_4882.jpeg">
+
+    <img class="foto-lateral foto-derecha" src="IMG_4882.jpeg">
+
   </div>
 </section>
-
-<!-- ========================= -->
-<!-- HISTORIA + CARRUSEL -->
-<!-- ========================= -->
 
 <section id="historia" class="historia animar">
+  <div class="historia-contenido">
 
-  <div class="historia-galeria">
-    <button onclick="moverCarrusel(-1)">&#10094;</button>
-
-    <div class="carrusel-fotos" id="carruselFotos">
-      <img src="IMG_1.jpg" class="foto-carrusel activa">
-      <img src="IMG_2.jpg" class="foto-carrusel">
-      <img src="IMG_3.jpg" class="foto-carrusel">
-      <img src="IMG_4.jpg" class="foto-carrusel">
+    <div class="historia-texto">
+      <h2>comienza nuestra historia</h2>
     </div>
 
-    <button onclick="moverCarrusel(1)">&#10095;</button>
+    <div class="historia-galeria">
+      <button onclick="moverCarrusel(-1)">&#10094;</button>
+
+      <div class="carrusel-fotos" id="carruselFotos">
+        <img src="IMG_1.jpg" class="foto-carrusel activa">
+        <img src="IMG_2.jpg" class="foto-carrusel">
+        <img src="IMG_3.jpg" class="foto-carrusel">
+        <img src="IMG_4.jpg" class="foto-carrusel">
+        <img src="IMG_5.jpg" class="foto-carrusel">
+        <img src="IMG_6.jpg" class="foto-carrusel">
+      </div>
+
+      <button onclick="moverCarrusel(1)">&#10095;</button>
+    </div>
+
   </div>
-
 </section>
-
-<!-- ========================= -->
-<!-- DETALLES -->
-<!-- ========================= -->
 
 <section id="detalles" class="detalles animar">
-  <h2>Detalles</h2>
+  <h2>Detalles de la Boda</h2>
 
-  <div>
-    <strong id="dias">0</strong>
-    <strong id="horas">0</strong>
-    <strong id="minutos">0</strong>
-    <strong id="segundos">0</strong>
+  <div class="contador-detalles">
+    <div><strong id="dias">0</strong></div>
+    <div><strong id="horas">0</strong></div>
+    <div><strong id="minutos">0</strong></div>
+    <div><strong id="segundos">0</strong></div>
   </div>
-
 </section>
 
-<!-- ========================= -->
-<!-- UBICACIÓN -->
-<!-- ========================= -->
-
-<section id="ubicacion" class="animar">
-  <iframe src="https://www.google.com/maps?q=Salon+Naturafrut+San+Pedro+Tapanatepec+Oaxaca&output=embed" width="100%" height="300"></iframe>
+<section id="ubicacion" class="ubicacion animar">
+  <iframe src="https://www.google.com/maps?q=Salon+Naturafrut+San+Pedro+Tapanatepec+Oaxaca&output=embed"></iframe>
 </section>
 
 <footer class="animar">
   <p>JESHUA & ANGELLI</p>
 </footer>
+
+</div>
 
 <!-- ========================= -->
 <!-- AUDIO -->
@@ -179,16 +202,11 @@ h1,h2,h3 { font-family: 'Playfair Display', serif; }
   <source src="https://raw.githubusercontent.com/francispain/boda-audio/main/paulyudin-romantic-wedding-piano-160698.mp3">
 </audio>
 
-<audio id="sonidoSobre">
-  <source src="https://assets.mixkit.co/active_storage/sfx/212/212-preview.mp3">
-</audio>
-
 <button onclick="controlarMusica()">♫ Música</button>
 
 <script src="script.js"></script>
 
 <script>
-// animaciones scroll
 const els = document.querySelectorAll('.animar');
 window.addEventListener('scroll', () => {
   els.forEach(el => {
@@ -198,7 +216,6 @@ window.addEventListener('scroll', () => {
   });
 });
 
-// pétalos
 for (let i = 0; i < 25; i++) {
   let p = document.createElement("div");
   p.className = "petalo";
