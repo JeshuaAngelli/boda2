@@ -739,11 +739,28 @@ footer {
 }
 
 @media (max-width: 900px) {
-  .foto-lateral {
-    display: none;
-  }
-}
 
+  .contenedor-portada {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .foto-lateral {
+    display: block;
+    width: 85%;
+    max-width: 320px;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 30px;
+  }
+
+  .tarjeta-portada {
+    flex: none;
+    width: 90%;
+  }
+
+}
 .contenedor-portada {
   max-width: 1180px;
   margin: 0 auto;
