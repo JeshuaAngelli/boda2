@@ -9,7 +9,6 @@
 <link rel="stylesheet" href="style.css">
 
 <!-- FUENTES -->
-
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
@@ -54,7 +53,18 @@ h1,h2,h3 { font-family: 'Playfair Display', serif; }
 
 </head>
 
-<body>
+<body class="no-scroll">
+
+<!-- 🔥 SOBRE -->
+<div id="envelope-wrapper">
+  <div class="envelope" id="sobre">
+    <div class="flap"></div>
+    <div class="envelope-right"></div>
+    <div class="seal">J&A</div>
+    <div class="letter">Jeshua & Angelli</div>
+  </div>
+  <p style="margin-top:15px;">Toca para abrir</p>
+</div>
 
 <nav class="animar">
   <a class="logo-privado" href="https://docs.google.com/spreadsheets/d/16ob_KtGP0o8lPybOJRXrYS-tIvXSdL5yiPvvIEunbf8/edit?gid=0#gid=0" target="_blank">J&A</a>
@@ -70,20 +80,18 @@ h1,h2,h3 { font-family: 'Playfair Display', serif; }
 <section id="inicio" class="portada animar">
   <div class="contenedor-portada">
 
-```
-<img class="foto-lateral foto-izquierda" src="IMG_4879.jpeg" alt="Foto izquierda">
+    <img class="foto-lateral foto-izquierda" src="IMG_4879.jpeg" alt="Foto izquierda">
 
-<div class="tarjeta-portada">
-  <span class="decoracion">❦</span>
-  <h1>Nos casamos</h1>
-  <p class="nombres">Jeshua & Angelli</p>
-  <p class="fecha">30 · MAYO · 2026</p>
-  <p class="frase-portada">Nos encantaría que formaras parte de este día</p>
-  <a class="boton-portada" href="#detalles">Ver detalles</a>
-</div>
+    <div class="tarjeta-portada">
+      <span class="decoracion">❦</span>
+      <h1>Nos casamos</h1>
+      <p class="nombres">Jeshua & Angelli</p>
+      <p class="fecha">30 · MAYO · 2026</p>
+      <p class="frase-portada">Nos encantaría que formaras parte de este día</p>
+      <a class="boton-portada" href="#detalles">Ver detalles</a>
+    </div>
 
-<img class="foto-lateral foto-derecha" src="IMG_4882.jpeg" alt="Foto derecha">
-```
+    <img class="foto-lateral foto-derecha" src="IMG_4882.jpeg" alt="Foto derecha">
 
   </div>
 </section>
@@ -91,32 +99,30 @@ h1,h2,h3 { font-family: 'Playfair Display', serif; }
 <section id="historia" class="historia animar">
   <div class="historia-contenido">
 
-```
-<div class="historia-texto">
-  <h2> comienza nuestra historia</h2>
-  <p class="intro-historia"></p>
+    <div class="historia-texto">
+      <h2> comienza nuestra historia</h2>
+      <p class="intro-historia"></p>
 
-  <div class="poema-amor">
-    <p>Te elegí sin ruido,<br>como florece la mañana,<br>poco a poco,<br>llenándolo todo de luz.</p>
-    <p>Y en tus ojos encontré<br>un lugar donde quedarme,<br>un hogar sereno,<br>una vida compartida.</p>
-    <p>Si el amor tiene forma,<br>la nuestra está hecha<br>de abrazos, paciencia,<br>promesas y destino.</p>
-  </div>
-</div>
+      <div class="poema-amor">
+        <p>Te elegí sin ruido,<br>como florece la mañana,<br>poco a poco,<br>llenándolo todo de luz.</p>
+        <p>Y en tus ojos encontré<br>un lugar donde quedarme,<br>un hogar sereno,<br>una vida compartida.</p>
+        <p>Si el amor tiene forma,<br>la nuestra está hecha<br>de abrazos, paciencia,<br>promesas y destino.</p>
+      </div>
+    </div>
 
-<div class="historia-galeria">
-  <button class="flecha flecha-izquierda" onclick="moverCarrusel(-1)">&#10094;</button>
+    <div class="historia-galeria">
+      <button class="flecha flecha-izquierda" onclick="moverCarrusel(-1)">&#10094;</button>
 
-  <div class="carrusel-fotos" id="carruselFotos">
-    <img src="IMG_5095.jpeg" class="foto-carrusel activa">
-    <img src="IMG_5083.jpeg" class="foto-carrusel">
-    <img src="IMG_5084.jpeg" class="foto-carrusel">
-      <img src="IMG_5082.jpeg" class="foto-carrusel">  
-    <img src="IMG_5093.jpeg" class="foto-carrusel">
-  </div>
+      <div class="carrusel-fotos" id="carruselFotos">
+        <img src="IMG_5095.jpeg" class="foto-carrusel activa">
+        <img src="IMG_5083.jpeg" class="foto-carrusel">
+        <img src="IMG_5084.jpeg" class="foto-carrusel">
+        <img src="IMG_5082.jpeg" class="foto-carrusel">  
+        <img src="IMG_5093.jpeg" class="foto-carrusel">
+      </div>
 
-  <button class="flecha flecha-derecha" onclick="moverCarrusel(1)">&#10095;</button>
-</div>
-```
+      <button class="flecha flecha-derecha" onclick="moverCarrusel(1)">&#10095;</button>
+    </div>
 
   </div>
 </section>
@@ -127,17 +133,14 @@ h1,h2,h3 { font-family: 'Playfair Display', serif; }
   <div class="cuenta-detalles">
     <p>Faltan</p>
 
-```
-<div class="contador-detalles">
-  <div><strong id="dias">0</strong><span>Días</span></div>
-  <div><strong id="horas">0</strong><span>Horas</span></div>
-  <div><strong id="minutos">0</strong><span>Minutos</span></div>
-  <div><strong id="segundos">0</strong><span>Segundos</span></div>
-</div>
+    <div class="contador-detalles">
+      <div><strong id="dias">0</strong><span>Días</span></div>
+      <div><strong id="horas">0</strong><span>Horas</span></div>
+      <div><strong id="minutos">0</strong><span>Minutos</span></div>
+      <div><strong id="segundos">0</strong><span>Segundos</span></div>
+    </div>
 
-<p>para el gran día</p>
-```
-
+    <p>para el gran día</p>
   </div>
 
   <div class="contenedor-detalles">
@@ -146,18 +149,15 @@ h1,h2,h3 { font-family: 'Playfair Display', serif; }
       <p>sabado, 30 de mayo de 2026<br>01:00 PM h</p>
     </div>
 
-```
-<div class="detalle">
-  <h3>Lugar</h3>
-  <p>Salon Natura frut<br>San Pedro Tapanatepec, Oaxaca</p>
-</div>
+    <div class="detalle">
+      <h3>Lugar</h3>
+      <p>Salon Natura frut<br>San Pedro Tapanatepec, Oaxaca</p>
+    </div>
 
-<div class="detalle">
-  <h3>Código de vestimenta</h3>
-  <p>Ven como quieras,<br>pero ven</p>
-</div>
-```
-
+    <div class="detalle">
+      <h3>Código de vestimenta</h3>
+      <p>Ven como quieras,<br>pero ven</p>
+    </div>
   </div>
 </section>
 
@@ -170,44 +170,37 @@ h1,h2,h3 { font-family: 'Playfair Display', serif; }
       <div><h3>Recepcion</h3><p>Comienza nuestro gran día.</p></div>
     </div>
 
-```
-<div class="momento">
-  <span>4:30 PM </span>
-  <div><h3>Protocolo</h3><p>Un momento para compartir.</p></div>
-</div>
+    <div class="momento">
+      <span>4:30 PM </span>
+      <div><h3>Protocolo</h3><p>Un momento para compartir.</p></div>
+    </div>
 
-<div class="momento">
-  <span>05:30 Pm </span>
-  <div><h3>Celebración</h3><p>Disfrutaremos juntos de una tarde especial.</p></div>
-</div>
+    <div class="momento">
+      <span>05:30 PM </span>
+      <div><h3>Celebración</h3><p>Disfrutaremos juntos de una tarde especial.</p></div>
+    </div>
 
-<div class="momento">
-  <span>Intervencion musical</span>
-  <div><h3>Banda Coco Ft Rayito Lozano "El Palomito"</h3><p></p></div>
-</div>
-```
-
+    <div class="momento">
+      <span>Intervencion musical</span>
+      <div><h3>Banda Coco Ft Rayito Lozano "El Palomito"</h3></div>
+    </div>
   </div>
 </section>
 
 <section id="ubicacion" class="ubicacion animar">
   <h2>Ubicación</h2>
 
-  <!-- CORREGIDO -->
-
   <iframe 
     src="https://www.google.com/maps?q=Salon+Naturafrut+San+Pedro+Tapanatepec+Oaxaca&output=embed"
     width="100%" height="300" style="border-radius:20px;" loading="lazy">
   </iframe>
 
-<br><br>
+  <br><br>
 
   <a class="boton" href="https://maps.app.goo.gl/AzddTkKKnSyDaCb99" target="_blank">
     Ver en Google Maps
   </a>
 </section>
-
-
 
 <footer class="animar">
   <p>JESHUA & ANGELLI</p>
