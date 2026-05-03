@@ -22,8 +22,6 @@ function actualizarCuentaAtras() {
   document.getElementById("segundos").textContent = segundos.toString().padStart(2,"0");
 }
 
-setInterval(actualizarCuentaAtras, 1000);
-
 // =========================
 // MÚSICA
 // =========================
@@ -46,13 +44,15 @@ function controlarMusica() {
 }
 
 // =========================
-// CARRUSEL (TU ORIGINAL)
+// CARRUSEL PRO (SEGURO)
 // =========================
 
 let indiceCarrusel = 0;
 
 function actualizarCarrusel() {
   const fotos = document.querySelectorAll(".foto-carrusel");
+
+  if (!fotos.length) return;
 
   fotos.forEach((foto) => {
     foto.classList.remove("activa", "anterior", "siguiente");
@@ -69,34 +69,15 @@ function actualizarCarrusel() {
 
 function moverCarrusel(direccion) {
   const fotos = document.querySelectorAll(".foto-carrusel");
+
+  if (!fotos.length) return;
+
   indiceCarrusel = (indiceCarrusel + direccion + fotos.length) % fotos.length;
   actualizarCarrusel();
 }
 
-actualizarCarrusel();
-
-// swipe móvil
-let inicioX = 0;
-let finX = 0;
-
-const carrusel = document.getElementById("carruselFotos");
-
-if (carrusel) {
-  carrusel.addEventListener("touchstart", (e) => {
-    inicioX = e.changedTouches[0].clientX;
-  });
-
-  carrusel.addEventListener("touchend", (e) => {
-    finX = e.changedTouches[0].clientX;
-
-    if (inicioX - finX > 40) moverCarrusel(1);
-    else if (finX - inicioX > 40) moverCarrusel(-1);
-  });
-}
-
 // =========================
-// =========================
-// SOBRE + SONIDO + FIX SCROLL
+// SOBRE + SONIDO + SCROLL FIX
 // =========================
 
 function abrirSobre() {
@@ -109,7 +90,7 @@ function abrirSobre() {
 
   sobre.classList.add('abierto');
 
-  // 🔥 GUARDAR ESTADO (IMPORTANTE)
+  // guardar estado
   localStorage.setItem("sobreVisto", "true");
 
   // sonido sobre
@@ -132,7 +113,7 @@ function abrirSobre() {
     document.body.classList.remove('no-scroll');
   }, 800);
 
-  // quitar overlay + FIX scroll
+  // ocultar overlay + scroll top
   setTimeout(() => {
     overlay.style.display = 'none';
     window.scrollTo(0, 0);
@@ -140,19 +121,42 @@ function abrirSobre() {
 }
 
 // =========================
-// SOBRE SOLO UNA VEZ
+// INIT SEGURO
 // =========================
 
 window.addEventListener("load", () => {
 
   actualizarCuentaAtras();
+  actualizarCarrusel();
 
+  // sobre solo una vez
   if (localStorage.getItem("sobreVisto") === "true") {
     const overlay = document.getElementById("overlay");
     if (overlay) overlay.style.display = "none";
     document.body.classList.remove("no-scroll");
   }
 
-});
+  // swipe carrusel
+  const carrusel = document.getElementById("carruselFotos");
+
+  if (carrusel) {
+    let inicioX = 0;
+
+    carrusel.addEventListener("touchstart", (e) => {
+      inicioX = e.changedTouches[0].clientX;
+    });
+
+    carrusel.addEventListener("touchend", (e) => {
+      const finX = e.changedTouches[0].clientX;
+
+      if (inicioX - finX > 40) moverCarrusel(1);
+      if (finX - inicioX > 40) moverCarrusel(-1);
+    });
+  }
+
+  // auto slide (opcional)
+  setInterval(() => {
+    moverCarrusel(1);
+  }, 4000);
 
 });
