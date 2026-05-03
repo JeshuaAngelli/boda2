@@ -964,105 +964,199 @@ h1, h2, h3 {
   100% { transform: translateY(100vh) translateX(50px); }
 }  
 /* =====================================
-   SOBRE INICIAL (FIX DEFINITIVO)
-===================================== */
+/* =========================================
+   VARIABLES GLOBALES
+   ========================================= */
+:root {
+    /* Blush Pink (Sobre) */
+    --pink-base:    #EBD6D9; 
+    --pink-dark:    #D0B5B9; 
+    --pink-light:   #F9EAEC; 
+    --bg-surface:   #C2A8AB; 
 
-body.no-scroll {
-  overflow: hidden !important;
+    /* Colores del texto interno */
+    --olive-text:   #5B6345; /* Verde oliva oscuro para lectura */
+    --white-card:   #FAF7F2; /* Blanco roto/papel */
+
+    /* Dorado Metálico */
+    --gold-light:   #FCE39E;
+    --gold-base:    #D4AF37;
+    --gold-dark:    #997A15;
 }
 
-/* capa total por encima */
-#envelope-wrapper {
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100vw !important;
-  height: 100vh !important;
-  background: #f8f3ef !important;
-  z-index: 9999999999 !important; /* 🔥 gana contra TODO */
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  flex-direction: column !important;
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: var(--bg-surface);
+    width: 100vw; height: 100vh;
+    overflow: hidden;
+    font-family: 'Cormorant Garamond', serif;
+    display: flex; justify-content: center; align-items: center;
 }
 
-/* evita que otros elementos interfieran */
-#envelope-wrapper * {
-  position: relative;
-  z-index: inherit;
+body::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.12; mix-blend-mode: overlay;
+    pointer-events: none; z-index: 999;
 }
 
-/* SOBRE */
+/* =========================================
+   ESCENA
+   ========================================= */
+.scene {
+    position: relative;
+    width: 88vw; max-width: 420px;
+    aspect-ratio: 5 / 7.2; 
+    transition: transform 1.6s cubic-bezier(0.4, 0, 0.2, 1), 
+                opacity 1.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center center;
+}
+
+.scene.is-zooming {
+    transform: scale(4.5) translateX(3%); 
+    opacity: 0;
+}
+
+/* =========================================
+   CAPAS DEL SOBRE Y LA CARTA
+   ========================================= */
 .envelope {
-  width: 320px;
-  height: 220px;
-  position: relative;
-  cursor: pointer;
+    position: relative; width: 100%; height: 100%;
+    perspective: 2000px; box-shadow: 0 25px 50px rgba(0,0,0,0.3);
 }
 
-/* base */
-.envelope::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  border-left: 160px solid transparent;
-  border-right: 160px solid transparent;
-  border-bottom: 110px solid #EFE9DF;
+.layer { position: absolute; inset: 0; }
+
+.env-back {
+    background: var(--pink-dark);
+    box-shadow: inset 0 0 80px rgba(0,0,0,0.5);
+    z-index: 1;
 }
 
-/* lado */
-.envelope-right {
-  position: absolute;
-  right: 0;
-  border-top: 110px solid transparent;
-  border-right: 160px solid #E8E0D5;
-  border-bottom: 110px solid transparent;
+/* --- TARJETA BLANCA INTERIOR --- */
+.env-card {
+    background: var(--white-card);
+    top: 3%; left: 3%; right: 3%; bottom: 3%;
+    border-radius: 3px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    z-index: 2; /* Empieza al fondo (dentro del bolsillo) */
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1), 
+                box-shadow 1.2s ease, z-index 0s;
 }
 
-/* tapa */
-.flap {
-  position: absolute;
-  border-left: 160px solid transparent;
-  border-right: 160px solid transparent;
-  border-top: 120px solid #DFD5C7;
-  transform-origin: top;
-  transition: transform 0.9s ease;
+/* MAGIA FÍSICA: Al salir, la tarjeta salta al frente (z-index: 20) 
+   y se escala ligeramente simulando que la sacan y levantan */
+.env-card.is-lifted {
+    z-index: 20; 
+    transform: translateX(12%) scale(1.02);
+    box-shadow: -5px 10px 25px rgba(0,0,0,0.3);
 }
 
-/* sello */
-.seal {
-  position: absolute;
-  top: 95px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: white;
-  width: 55px;
-  height: 55px;
-  border-radius: 50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 18px;
+/* Texto Oliva para el interior */
+.olive-text {
+    color: var(--olive-text);
 }
 
-/* carta */
-.letter {
-  position: absolute;
-  inset: 10px;
-  background: white;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-family: 'Cormorant Garamond', serif;
-  transition: transform 0.9s ease;
+.card-pre {
+    font-family: 'Jost', sans-serif; text-transform: uppercase; 
+    letter-spacing: 4px; font-size: 0.85rem; margin-bottom: 15px;
+}
+.card-title {
+    font-size: 3.8rem; font-weight: 300; letter-spacing: 5px;
 }
 
-/* animación */
-.envelope.open .flap {
-  transform: rotateX(180deg);
+/* --- SOLAPAS FIJAS --- */
+.flap-wrapper { position: absolute; inset: 0; pointer-events: none; }
+.flap-shape { position: absolute; inset: 0; background: linear-gradient(135deg, var(--pink-light) 0%, var(--pink-base) 60%, var(--pink-dark) 100%); }
+
+.flap-top-wrapper { z-index: 3; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15)); }
+.flap-top { clip-path: polygon(0 0, 100% 0, 50% 50%); }
+
+.flap-bottom-wrapper { z-index: 4; filter: drop-shadow(0 -4px 6px rgba(0,0,0,0.15)); }
+.flap-bottom { clip-path: polygon(0 100%, 100% 100%, 50% 50%); }
+
+.flap-left-wrapper { z-index: 5; filter: drop-shadow(4px 0 8px rgba(0,0,0,0.2)); }
+.flap-left { clip-path: polygon(0 0, 55% 50%, 0 100%); }
+
+/* Texto Dorado para el Monograma Exterior */
+.gold-text {
+    background: linear-gradient(135deg, #C4A04D 0%, #F9E29A 30%, #D4AF37 50%, #FFF3B3 80%, #997A15 100%);
+    -webkit-background-clip: text;
+    color: transparent;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
 }
 
-.envelope.open .letter {
-  transform: translateY(-140px);
+/* Monograma reposicionado bien cerca del borde (left: 5%) */
+.monogram-outer {
+    position: absolute;
+    top: 50%; left: 5%;
+    transform: translateY(-50%) rotate(-90deg);
+    font-size: 1.6rem; letter-spacing: 6px; font-weight: 400;
+}
+
+/* --- SOLAPA PRINCIPAL DERECHA --- */
+.env-flap-main {
+    z-index: 6;
+    transform-origin: right center; 
+    transform-style: preserve-3d;
+    transition: transform 1.3s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: drop-shadow(-6px 0 15px rgba(0,0,0,0.25)) drop-shadow(1px 0 0 rgba(255,255,255,0.4));
+}
+
+.env-flap-main.is-opening { transform: rotateY(165deg); }
+
+.flap-right {
+    clip-path: polygon(100% 0, 38% 44%, 34% 50%, 38% 56%, 100% 100%);
+    background: linear-gradient(to left, var(--pink-light) 0%, var(--pink-base) 100%);
+}
+
+/* =========================================
+   SELLO DORADO
+   ========================================= */
+.wax-seal {
+    position: absolute;
+    top: 50%; left: 34%; 
+    transform: translate(-50%, -50%);
+    width: 84px; height: 84px;
+    border-radius: 49% 51% 52% 48% / 51% 49% 48% 52%;
+    background: radial-gradient(circle at 30% 30%, var(--gold-light) 0%, var(--gold-base) 45%, var(--gold-dark) 100%);
+    box-shadow: 
+        -6px 8px 15px rgba(0,0,0,0.3),          
+        -1px 2px 4px rgba(0,0,0,0.5),           
+        inset 2px 3px 6px rgba(255,255,255,0.6),
+        inset -3px -4px 8px rgba(0,0,0,0.5);    
+    cursor: pointer; pointer-events: auto;
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1.2);
+}
+
+.wax-seal:hover { transform: translate(-50%, -50%) scale(1.05); }
+
+.wax-seal-inner {
+    position: absolute; inset: 5px; 
+    border-radius: 52% 48% 51% 49% / 49% 51% 48% 52%;
+    background: radial-gradient(circle at 50% 50%, var(--gold-base) 0%, var(--gold-dark) 100%);
+    display: flex; justify-content: center; align-items: center;
+    box-shadow: inset 0 3px 8px rgba(0,0,0,0.6), inset 0 -2px 4px rgba(255,255,255,0.3);
+}
+
+.wax-seal-inner svg {
+    width: 36px; height: 36px; color: #634C08; 
+    filter: drop-shadow(0 -1px 0 rgba(0,0,0,0.5)) drop-shadow(0 1px 0 rgba(255,255,255,0.4));
+}
+
+/* =========================================
+   TRANSICIÓN BLANCA FINAL
+   ========================================= */
+.transition-screen {
+    position: fixed; inset: 0;
+    background-color: var(--white-card);
+    opacity: 0; pointer-events: none;
+    z-index: 1000; transition: opacity 1.2s ease;
+}
+
+.transition-screen.is-fading {
+    opacity: 1;
 }
