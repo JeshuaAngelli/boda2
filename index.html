@@ -67,8 +67,9 @@ h1,h2,h3 { font-family: 'Playfair Display', serif; }
     </div>
   </div>
 </div>
+
 <nav class="animar">
-  <a class="logo-privado" href="https://docs.google.com/spreadsheets/d/16ob_KtGP0o8lPybOJRXrYS-tIvXSdL5yiPvvIEunbf8/edit?gid=0#gid=0" target="_blank">J&A</a>
+  <a class="logo-privado" href="#" target="_blank">J&A</a>
   <div>
     <a href="#inicio">Inicio</a>
     <a href="#historia">Historia</a>
@@ -102,7 +103,6 @@ h1,h2,h3 { font-family: 'Playfair Display', serif; }
 
     <div class="historia-texto">
       <h2> comienza nuestra historia</h2>
-      <p class="intro-historia"></p>
 
       <div class="poema-amor">
         <p>Te elegí sin ruido,<br>como florece la mañana,<br>poco a poco,<br>llenándolo todo de luz.</p>
@@ -115,19 +115,17 @@ h1,h2,h3 { font-family: 'Playfair Display', serif; }
       <button class="flecha flecha-izquierda" onclick="moverCarrusel(-1)">&#10094;</button>
 
       <div class="carrusel-fotos" id="carruselFotos">
-        <img src="IMG_1.jpg" class="foto-carrusel activa">
-        <img src="IMG_2.jpg" class="foto-carrusel">
-        <img src="IMG_3.jpg" class="foto-carrusel">
-        <img src="IMG_4.jpg" class="foto-carrusel">  
-        <img src="IMG_5.jpg" class="foto-carrusel">
-         <img src="IMG_6.jpg" class="foto-carrusel">
-        <img src="IMG_7.jpg" class="foto-carrusel">
-        <img src="IMG_8.jpg" class="foto-carrusel">  
-        <img src="IMG_9.jpg" class="foto-carrusel">
-        <img src="IMG_10.jpg" class="foto-carrusel">
-         <img src="IMG_12.jpg" class="foto-carrusel">
-        <img src="IMG_11.jpg" class="foto-carrusel">
-
+        <img src="IMG_1.jpeg" class="foto-carrusel activa">
+        <img src="IMG_2.jpeg" class="foto-carrusel">
+        <img src="IMG_3.jpeg" class="foto-carrusel">
+        <img src="IMG_4.jpeg" class="foto-carrusel">  
+        <img src="IMG_5.jpeg" class="foto-carrusel">
+        <img src="IMG_6.jpeg" class="foto-carrusel">
+        <img src="IMG_7.jpeg" class="foto-carrusel">
+        <img src="IMG_8.jpeg" class="foto-carrusel">  
+        <img src="IMG_9.jpeg" class="foto-carrusel">
+        <img src="IMG_10.jpeg" class="foto-carrusel">
+        <img src="IMG_11.jpeg" class="foto-carrusel">
       </div>
 
       <button class="flecha flecha-derecha" onclick="moverCarrusel(1)">&#10095;</button>
@@ -155,12 +153,12 @@ h1,h2,h3 { font-family: 'Playfair Display', serif; }
   <div class="contenedor-detalles">
     <div class="detalle">
       <h3>Fecha y hora</h3>
-      <p>sabado, 30 de mayo de 2026<br>01:00 PM h</p>
+      <p>sábado, 30 de mayo de 2026<br>01:00 PM</p>
     </div>
 
     <div class="detalle">
       <h3>Lugar</h3>
-      <p>Salon Natura frut<br>San Pedro Tapanatepec, Oaxaca</p>
+      <p>Salón Natura Frut<br>San Pedro Tapanatepec, Oaxaca</p>
     </div>
 
     <div class="detalle">
@@ -176,22 +174,17 @@ h1,h2,h3 { font-family: 'Playfair Display', serif; }
   <div class="linea-programa">
     <div class="momento">
       <span>1:00 PM</span>
-      <div><h3>Recepcion</h3><p>Comienza nuestro gran día.</p></div>
+      <div><h3>Recepción</h3><p>Comienza nuestro gran día.</p></div>
     </div>
 
     <div class="momento">
-      <span>4:30 PM </span>
+      <span>4:30 PM</span>
       <div><h3>Protocolo</h3><p>Un momento para compartir.</p></div>
     </div>
 
     <div class="momento">
-      <span>05:30 PM </span>
+      <span>5:30 PM</span>
       <div><h3>Celebración</h3><p>Disfrutaremos juntos de una tarde especial.</p></div>
-    </div>
-
-    <div class="momento">
-      <span>Intervencion musical</span>
-      <div><h3>Banda Coco Ft Rayito Lozano "El Palomito"</h3></div>
     </div>
   </div>
 </section>
@@ -224,6 +217,22 @@ h1,h2,h3 { font-family: 'Playfair Display', serif; }
 <script src="script.js"></script>
 
 <script>
+function abrirSobre() {
+  const sobre = document.querySelector('.envelope');
+  const overlay = document.getElementById('overlay');
+
+  sobre.classList.add('abierto');
+
+  setTimeout(() => {
+    overlay.style.opacity = '0';
+    overlay.style.transition = 'opacity 0.8s ease';
+  }, 600);
+
+  setTimeout(() => {
+    overlay.style.display = 'none';
+  }, 1400);
+}
+
 /* SCROLL */
 const els = document.querySelectorAll('.animar');
 window.addEventListener('scroll', () => {
