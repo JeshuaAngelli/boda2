@@ -61,7 +61,7 @@ fetch(URL_GOOGLE_SHEETS, {
 }
 
 function actualizarCuentaAtras() {
-  const fechaBoda = new Date("October 9, 2026 18:45:00").getTime();
+  const fechaBoda = new Date("May 31, 2026 13:00:00").getTime();
   const ahora = new Date().getTime();
   const diferencia = fechaBoda - ahora;
 
