@@ -1,71 +1,75 @@
-// file: script.js
+// =========================
+// SOBRE CODEPEN + REVELACIÓN PERFECTA
+// =========================
 
 document.addEventListener('DOMContentLoaded', () => {
-
-  // =========================
-  // ELEMENTOS SOBRE CODEPEN
-  // =========================
 
   const seal = document.getElementById('seal');
   const flap = document.getElementById('flap');
   const card = document.getElementById('card');
   const scene = document.getElementById('scene');
   const transitionScreen = document.getElementById('transition-screen');
-
+  const contenido = document.getElementById('contenido');
   const musica = document.getElementById('musicaFondo');
-  const sonido = document.getElementById('sonidoSobre');
 
   let animando = false;
 
-  if (seal) {
-    seal.addEventListener('click', () => {
+  if (!seal) return;
 
-      if (animando) return;
-      animando = true;
+  seal.addEventListener('click', () => {
 
-      // 🔊 sonido sobre
-      if (sonido) {
-        sonido.volume = 0.5;
-        sonido.play().catch(()=>{});
+    if (animando) return;
+    animando = true;
+
+    // 1. abrir sobre
+    flap.classList.add('is-opening');
+
+    // 2. sacar carta
+    setTimeout(() => {
+      card.classList.add('is-lifted');
+    }, 800);
+
+    // 3. música
+    setTimeout(() => {
+      if (musica) {
+        musica.volume = 0.1;
+        musica.play().catch(()=>{});
+      }
+    }, 1000);
+
+    // 4. zoom
+    setTimeout(() => {
+      scene.classList.add('is-zooming');
+    }, 1600);
+
+    // 5. fade blanco
+    setTimeout(() => {
+      transitionScreen.classList.add('is-fading');
+    }, 2200);
+
+    // =========================
+    // 🔥 REVELACIÓN FINAL REAL
+    // =========================
+    setTimeout(() => {
+
+      // quitar sobre COMPLETAMENTE
+      if (scene) scene.remove();
+      if (transitionScreen) transitionScreen.remove();
+
+      // mostrar contenido
+      if (contenido) {
+        contenido.classList.add('visible');
       }
 
-      // 1. abrir solapa
-      flap.classList.add('is-opening');
+      // desbloquear scroll
+      document.body.classList.remove('no-scroll');
 
-      // 2. sacar carta
-      setTimeout(() => {
-        card.classList.add('is-lifted');
-      }, 800);
+      // ir arriba SIEMPRE
+      window.scrollTo(0, 0);
 
-      // 🎵 música
-      setTimeout(() => {
-        if (musica) {
-          musica.volume = 0.1;
-          musica.play().catch(()=>{});
-        }
-      }, 1000);
+    }, 3200);
 
-      // 3. zoom escena
-      setTimeout(() => {
-        scene.classList.add('is-zooming');
-      }, 1600);
-
-      // 4. fade blanco
-      setTimeout(() => {
-        transitionScreen.classList.add('is-fading');
-      }, 2200);
-
-      // 5. MOSTRAR TU WEB (FIX IMPORTANTE)
-      setTimeout(() => {
-        transitionScreen.style.display = "none";
-        scene.style.display = "none"; // 🔥 oculta el sobre
-
-        document.body.style.overflow = "auto";
-        window.scrollTo(0, 0);
-      }, 3500);
-
-    });
-  }
+  });
 
 });
 
@@ -96,86 +100,36 @@ setInterval(actualizarCuentaAtras, 1000);
 
 
 // =========================
-// MÚSICA BOTÓN
-// =========================
-
-function controlarMusica() {
-  const musica = document.getElementById("musicaFondo");
-  const boton = document.getElementById("botonMusica");
-
-  if (!musica) return;
-
-  musica.volume = 0.1;
-
-  if (musica.paused) {
-    musica.play();
-    boton.textContent = "❚❚ Pausar";
-  } else {
-    musica.pause();
-    boton.textContent = "♫ Música";
-  }
-}
-
-
-// =========================
-// CARRUSEL (ESTABLE)
+// CARRUSEL
 // =========================
 
 let indiceCarrusel = 0;
 
 function actualizarCarrusel() {
   const fotos = document.querySelectorAll(".foto-carrusel");
-
   if (!fotos.length) return;
 
-  fotos.forEach((foto) => {
-    foto.classList.remove("activa", "anterior", "siguiente");
-  });
-
-  const total = fotos.length;
-  const anterior = (indiceCarrusel - 1 + total) % total;
-  const siguiente = (indiceCarrusel + 1) % total;
-
+  fotos.forEach(f => f.classList.remove("activa"));
   fotos[indiceCarrusel].classList.add("activa");
-  fotos[anterior].classList.add("anterior");
-  fotos[siguiente].classList.add("siguiente");
 }
 
-function moverCarrusel(direccion) {
+function moverCarrusel(dir) {
   const fotos = document.querySelectorAll(".foto-carrusel");
-
   if (!fotos.length) return;
 
-  indiceCarrusel = (indiceCarrusel + direccion + fotos.length) % fotos.length;
+  indiceCarrusel = (indiceCarrusel + dir + fotos.length) % fotos.length;
   actualizarCarrusel();
 }
 
 
 // =========================
-// INIT GENERAL
+// MÚSICA
 // =========================
 
-window.addEventListener("load", () => {
+function controlarMusica() {
+  const musica = document.getElementById("musicaFondo");
+  if (!musica) return;
 
-  actualizarCuentaAtras();
-  actualizarCarrusel();
-
-  // swipe móvil
-  const carrusel = document.getElementById("carruselFotos");
-
-  if (carrusel) {
-    let inicioX = 0;
-
-    carrusel.addEventListener("touchstart", (e) => {
-      inicioX = e.changedTouches[0].clientX;
-    });
-
-    carrusel.addEventListener("touchend", (e) => {
-      const finX = e.changedTouches[0].clientX;
-
-      if (inicioX - finX > 40) moverCarrusel(1);
-      if (finX - inicioX > 40) moverCarrusel(-1);
-    });
-  }
-
-});
+  if (musica.paused) musica.play();
+  else musica.pause();
+}
