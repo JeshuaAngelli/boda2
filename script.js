@@ -32,6 +32,8 @@ function controlarMusica() {
   const musica = document.getElementById("musicaFondo");
   const boton = document.getElementById("botonMusica");
 
+  if (!musica) return;
+
   musica.volume = 0.1;
 
   if (musica.paused) {
@@ -44,7 +46,7 @@ function controlarMusica() {
 }
 
 // =========================
-// CARRUSEL ORIGINAL
+// CARRUSEL (TU ORIGINAL)
 // =========================
 
 let indiceCarrusel = 0;
@@ -93,7 +95,7 @@ if (carrusel) {
 }
 
 // =========================
-// SOBRE + SONIDO
+// SOBRE + SONIDO + FIX SCROLL
 // =========================
 
 function abrirSobre() {
@@ -106,11 +108,13 @@ function abrirSobre() {
 
   sobre.classList.add('abierto');
 
+  // sonido sobre
   if (sonido) {
     sonido.volume = 0.5;
     sonido.play().catch(()=>{});
   }
 
+  // música
   setTimeout(() => {
     if (musica) {
       musica.volume = 0.1;
@@ -118,13 +122,19 @@ function abrirSobre() {
     }
   }, 600);
 
+  // fade overlay
   setTimeout(() => {
     overlay.style.opacity = '0';
     document.body.classList.remove('no-scroll');
   }, 800);
 
+  // quitar overlay + FORZAR SCROLL ARRIBA
   setTimeout(() => {
     overlay.style.display = 'none';
+
+    // 🔥 FIX IMPORTANTE
+    window.scrollTo(0, 0);
+
   }, 1500);
 }
 
@@ -133,9 +143,13 @@ function abrirSobre() {
 // =========================
 
 window.addEventListener("load", () => {
+
+  actualizarCuentaAtras();
+
   if (localStorage.getItem("sobreVisto") === "true") {
     const overlay = document.getElementById("overlay");
     if (overlay) overlay.style.display = "none";
     document.body.classList.remove("no-scroll");
   }
+
 });
