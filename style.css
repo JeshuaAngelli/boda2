@@ -925,25 +925,21 @@ footer {
     height: 360px;
   }
 }
-/*/* =========================
- /* =========================================
+/* =========================
    VARIABLES GLOBALES
-   ========================================= */
+   ========================= */
 :root {
-    /* Blush Pink (Sobre) */
-    --pink-base:    #EBD6D9; 
-    --pink-dark:    #D0B5B9; 
-    --pink-light:   #F9EAEC; 
-    --bg-surface:   #C2A8AB; 
+    --pink-base: #EBD6D9; 
+    --pink-dark: #D0B5B9; 
+    --pink-light: #F9EAEC; 
+    --bg-surface: #C2A8AB; 
 
-    /* Colores del texto interno */
-    --olive-text:   #5B6345; /* Verde oliva oscuro para lectura */
-    --white-card:   #FAF7F2; /* Blanco roto/papel */
+    --olive-text: #5B6345;
+    --white-card: #FAF7F2;
 
-    /* Dorado Metálico */
-    --gold-light:   #FCE39E;
-    --gold-base:    #D4AF37;
-    --gold-dark:    #997A15;
+    --gold-light: #FCE39E;
+    --gold-base: #D4AF37;
+    --gold-dark: #997A15;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -955,36 +951,69 @@ body {
     overflow-x: hidden;
     font-family: 'Cormorant Garamond', serif;
 }
-body::before {
-    content: ''; position: absolute; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    opacity: 0.12; mix-blend-mode: overlay;
-    pointer-events: none; z-index: 999;
+
+/* 🔥 BLOQUEO SCROLL */
+body.no-scroll {
+    overflow: hidden;
 }
 
-/* =========================================
-   ESCENA
-   ========================================= */
+/* TEXTURA */
+body::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.12;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* =========================
+   ESCENA FULLSCREEN (FIX REAL)
+   ========================= */
 .scene {
-    position: relative;
-    width: 88vw; max-width: 420px;
-    aspect-ratio: 5 / 7.2; 
+    position: fixed;   /* 🔥 CAMBIO CLAVE */
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: var(--bg-surface);
+    z-index: 99999;
+
     transition: transform 1.6s cubic-bezier(0.4, 0, 0.2, 1), 
                 opacity 1.6s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-origin: center center;
 }
 
 .scene.is-zooming {
-    transform: scale(4.5) translateX(3%); 
+    transform: scale(4.5) translateX(3%);
     opacity: 0;
 }
 
-/* =========================================
-   CAPAS DEL SOBRE Y LA CARTA
-   ========================================= */
+/* 🔥 OCULTAR WEB */
+#contenido {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1.2s ease;
+}
+
+#contenido.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* =========================
+   SOBRE
+   ========================= */
 .envelope {
-    position: relative; width: 100%; height: 100%;
-    perspective: 2000px; box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    position: relative;
+    width: 88vw;
+    max-width: 420px;
+    aspect-ratio: 5 / 7.2;
+    perspective: 2000px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
 }
 
 .layer { position: absolute; inset: 0; }
@@ -995,127 +1024,80 @@ body::before {
     z-index: 1;
 }
 
-/* --- TARJETA BLANCA INTERIOR --- */
+/* TARJETA */
 .env-card {
     background: var(--white-card);
     top: 3%; left: 3%; right: 3%; bottom: 3%;
     border-radius: 3px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    z-index: 2; /* Empieza al fondo (dentro del bolsillo) */
-    display: flex; flex-direction: column;
-    justify-content: center; align-items: center;
-    transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1), 
-                box-shadow 1.2s ease, z-index 0s;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 1.2s ease;
 }
 
-/* MAGIA FÍSICA: Al salir, la tarjeta salta al frente (z-index: 20) 
-   y se escala ligeramente simulando que la sacan y levantan */
 .env-card.is-lifted {
-    z-index: 20; 
+    z-index: 20;
     transform: translateX(12%) scale(1.02);
-    box-shadow: -5px 10px 25px rgba(0,0,0,0.3);
 }
 
-/* Texto Oliva para el interior */
-.olive-text {
-    color: var(--olive-text);
+/* TEXTO */
+.olive-text { color: var(--olive-text); }
+
+/* SOLAPAS */
+.flap-wrapper { position: absolute; inset: 0; }
+
+.flap-shape {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--pink-light), var(--pink-base));
 }
 
-.card-pre {
-    font-family: 'Jost', sans-serif; text-transform: uppercase; 
-    letter-spacing: 4px; font-size: 0.85rem; margin-bottom: 15px;
-}
-.card-title {
-    font-size: 3.8rem; font-weight: 300; letter-spacing: 5px;
-}
-
-/* --- SOLAPAS FIJAS --- */
-.flap-wrapper { position: absolute; inset: 0; pointer-events: none; }
-.flap-shape { position: absolute; inset: 0; background: linear-gradient(135deg, var(--pink-light) 0%, var(--pink-base) 60%, var(--pink-dark) 100%); }
-
-.flap-top-wrapper { z-index: 3; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15)); }
 .flap-top { clip-path: polygon(0 0, 100% 0, 50% 50%); }
-
-.flap-bottom-wrapper { z-index: 4; filter: drop-shadow(0 -4px 6px rgba(0,0,0,0.15)); }
 .flap-bottom { clip-path: polygon(0 100%, 100% 100%, 50% 50%); }
-
-.flap-left-wrapper { z-index: 5; filter: drop-shadow(4px 0 8px rgba(0,0,0,0.2)); }
 .flap-left { clip-path: polygon(0 0, 55% 50%, 0 100%); }
 
-/* Texto Dorado para el Monograma Exterior */
-.gold-text {
-    background: linear-gradient(135deg, #C4A04D 0%, #F9E29A 30%, #D4AF37 50%, #FFF3B3 80%, #997A15 100%);
-    -webkit-background-clip: text;
-    color: transparent;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-}
-
-/* Monograma reposicionado bien cerca del borde (left: 5%) */
-.monogram-outer {
-    position: absolute;
-    top: 50%; left: 5%;
-    transform: translateY(-50%) rotate(-90deg);
-    font-size: 1.6rem; letter-spacing: 6px; font-weight: 400;
-}
-
-/* --- SOLAPA PRINCIPAL DERECHA --- */
+/* SOLAPA PRINCIPAL */
 .env-flap-main {
     z-index: 6;
-    transform-origin: right center; 
+    transform-origin: right center;
     transform-style: preserve-3d;
-    transition: transform 1.3s cubic-bezier(0.4, 0, 0.2, 1);
-    filter: drop-shadow(-6px 0 15px rgba(0,0,0,0.25)) drop-shadow(1px 0 0 rgba(255,255,255,0.4));
+    transition: transform 1.3s ease;
 }
 
-.env-flap-main.is-opening { transform: rotateY(165deg); }
+.env-flap-main.is-opening {
+    transform: rotateY(165deg);
+}
 
 .flap-right {
     clip-path: polygon(100% 0, 38% 44%, 34% 50%, 38% 56%, 100% 100%);
-    background: linear-gradient(to left, var(--pink-light) 0%, var(--pink-base) 100%);
 }
 
-/* =========================================
-   SELLO DORADO
-   ========================================= */
+/* SELLO */
 .wax-seal {
     position: absolute;
-    top: 50%; left: 34%; 
+    top: 50%;
+    left: 34%;
     transform: translate(-50%, -50%);
-    width: 84px; height: 84px;
-    border-radius: 49% 51% 52% 48% / 51% 49% 48% 52%;
-    background: radial-gradient(circle at 30% 30%, var(--gold-light) 0%, var(--gold-base) 45%, var(--gold-dark) 100%);
-    box-shadow: 
-        -6px 8px 15px rgba(0,0,0,0.3),          
-        -1px 2px 4px rgba(0,0,0,0.5),           
-        inset 2px 3px 6px rgba(255,255,255,0.6),
-        inset -3px -4px 8px rgba(0,0,0,0.5);    
-    cursor: pointer; pointer-events: auto;
-    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1.2);
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, var(--gold-base), var(--gold-dark));
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
 }
 
-.wax-seal:hover { transform: translate(-50%, -50%) scale(1.05); }
-
-.wax-seal-inner {
-    position: absolute; inset: 5px; 
-    border-radius: 52% 48% 51% 49% / 49% 51% 48% 52%;
-    background: radial-gradient(circle at 50% 50%, var(--gold-base) 0%, var(--gold-dark) 100%);
-    display: flex; justify-content: center; align-items: center;
-    box-shadow: inset 0 3px 8px rgba(0,0,0,0.6), inset 0 -2px 4px rgba(255,255,255,0.3);
-}
-
-.wax-seal-inner svg {
-    width: 36px; height: 36px; color: #634C08; 
-    filter: drop-shadow(0 -1px 0 rgba(0,0,0,0.5)) drop-shadow(0 1px 0 rgba(255,255,255,0.4));
-}
-
-/* =========================================
-   TRANSICIÓN BLANCA FINAL
-   ========================================= */
+/* =========================
+   TRANSICIÓN
+   ========================= */
 .transition-screen {
-    position: fixed; inset: 0;
-    background-color: var(--white-card);
-    opacity: 0; pointer-events: none;
-    z-index: 1000; transition: opacity 1.2s ease;
+    position: fixed;
+    inset: 0;
+    background: var(--white-card);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 100000;
+    transition: opacity 1.2s ease;
 }
 
 .transition-screen.is-fading {
