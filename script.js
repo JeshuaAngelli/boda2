@@ -95,6 +95,7 @@ if (carrusel) {
 }
 
 // =========================
+// =========================
 // SOBRE + SONIDO + FIX SCROLL
 // =========================
 
@@ -107,6 +108,9 @@ function abrirSobre() {
   if (!sobre || !overlay) return;
 
   sobre.classList.add('abierto');
+
+  // 🔥 GUARDAR ESTADO (IMPORTANTE)
+  localStorage.setItem("sobreVisto", "true");
 
   // sonido sobre
   if (sonido) {
@@ -128,13 +132,10 @@ function abrirSobre() {
     document.body.classList.remove('no-scroll');
   }, 800);
 
-  // quitar overlay + FORZAR SCROLL ARRIBA
+  // quitar overlay + FIX scroll
   setTimeout(() => {
     overlay.style.display = 'none';
-
-    // 🔥 FIX IMPORTANTE
     window.scrollTo(0, 0);
-
   }, 1500);
 }
 
@@ -151,5 +152,7 @@ window.addEventListener("load", () => {
     if (overlay) overlay.style.display = "none";
     document.body.classList.remove("no-scroll");
   }
+
+});
 
 });
