@@ -962,4 +962,107 @@ h1, h2, h3 {
 @keyframes caer {
   0% { transform: translateY(0) translateX(0); }
   100% { transform: translateY(100vh) translateX(50px); }
+}  
+/* =====================================
+   SOBRE INICIAL (FIX DEFINITIVO)
+===================================== */
+
+body.no-scroll {
+  overflow: hidden !important;
+}
+
+/* capa total por encima */
+#envelope-wrapper {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background: #f8f3ef !important;
+  z-index: 9999999999 !important; /* 🔥 gana contra TODO */
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-direction: column !important;
+}
+
+/* evita que otros elementos interfieran */
+#envelope-wrapper * {
+  position: relative;
+  z-index: inherit;
+}
+
+/* SOBRE */
+.envelope {
+  width: 320px;
+  height: 220px;
+  position: relative;
+  cursor: pointer;
+}
+
+/* base */
+.envelope::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  border-left: 160px solid transparent;
+  border-right: 160px solid transparent;
+  border-bottom: 110px solid #EFE9DF;
+}
+
+/* lado */
+.envelope-right {
+  position: absolute;
+  right: 0;
+  border-top: 110px solid transparent;
+  border-right: 160px solid #E8E0D5;
+  border-bottom: 110px solid transparent;
+}
+
+/* tapa */
+.flap {
+  position: absolute;
+  border-left: 160px solid transparent;
+  border-right: 160px solid transparent;
+  border-top: 120px solid #DFD5C7;
+  transform-origin: top;
+  transition: transform 0.9s ease;
+}
+
+/* sello */
+.seal {
+  position: absolute;
+  top: 95px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+}
+
+/* carta */
+.letter {
+  position: absolute;
+  inset: 10px;
+  background: white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family: 'Cormorant Garamond', serif;
+  transition: transform 0.9s ease;
+}
+
+/* animación */
+.envelope.open .flap {
+  transform: rotateX(180deg);
+}
+
+.envelope.open .letter {
+  transform: translateY(-140px);
 }
