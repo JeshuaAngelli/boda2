@@ -13,14 +13,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
-body {
-  font-family: 'Poppins', sans-serif;
-}
-h1, h2, h3 {
-  font-family: 'Playfair Display', serif;
-}
+body { font-family: 'Poppins', sans-serif; }
+h1,h2,h3 { font-family: 'Playfair Display', serif; }
 
-/* ANIMACIÓN SUAVE */
+/* ANIMACIONES */
 .animar {
   opacity: 0;
   transform: translateY(40px);
@@ -31,7 +27,7 @@ h1, h2, h3 {
   transform: translateY(0);
 }
 
-/* BOTONES MÁS FINOS */
+/* BOTONES */
 .boton, .boton-portada {
   transition: 0.3s ease;
 }
@@ -98,6 +94,7 @@ h1, h2, h3 {
 ```
 <div class="historia-texto">
   <h2> comienza nuestra historia</h2>
+  <p class="intro-historia"></p>
 
   <div class="poema-amor">
     <p>Te elegí sin ruido,<br>como florece la mañana,<br>poco a poco,<br>llenándolo todo de luz.</p>
@@ -125,16 +122,76 @@ h1, h2, h3 {
 <section id="detalles" class="detalles animar">
   <h2>Detalles de la Boda</h2>
 
-  <div class="contador-detalles">
-    <div><strong id="dias">0</strong><span>Días</span></div>
-    <div><strong id="horas">0</strong><span>Horas</span></div>
-    <div><strong id="minutos">0</strong><span>Minutos</span></div>
-    <div><strong id="segundos">0</strong><span>Segundos</span></div>
+  <div class="cuenta-detalles">
+    <p>Faltan</p>
+
+```
+<div class="contador-detalles">
+  <div><strong id="dias">0</strong><span>Días</span></div>
+  <div><strong id="horas">0</strong><span>Horas</span></div>
+  <div><strong id="minutos">0</strong><span>Minutos</span></div>
+  <div><strong id="segundos">0</strong><span>Segundos</span></div>
+</div>
+
+<p>para el gran día</p>
+```
+
+  </div>
+
+  <div class="contenedor-detalles">
+    <div class="detalle">
+      <h3>Fecha y hora</h3>
+      <p>sabado, 30 de mayo de 2026<br>01:00 PM h</p>
+    </div>
+
+```
+<div class="detalle">
+  <h3>Lugar</h3>
+  <p>Salon naturafrut<br>San Pedro Tapanatepec, Oaxaca</p>
+</div>
+
+<div class="detalle">
+  <h3>Código de vestimenta</h3>
+  <p>Ven como quieras,<br>pero ven</p>
+</div>
+```
+
+  </div>
+</section>
+
+<section id="programa" class="programa animar">
+  <h2>Programa del día</h2>
+
+  <div class="linea-programa">
+    <div class="momento">
+      <span>1:00 PM</span>
+      <div><h3>Recepcion</h3><p>Comienza nuestro gran día.</p></div>
+    </div>
+
+```
+<div class="momento">
+  <span>4:30 PM </span>
+  <div><h3>Protocolo</h3><p>Un momento para compartir.</p></div>
+</div>
+
+<div class="momento">
+  <span>22:00</span>
+  <div><h3>Celebración</h3><p>Disfrutaremos juntos de una tarde especial.</p></div>
+</div>
+
+<div class="momento">
+  <span>Intervencion musical</span>
+  <div><h3>coco Show Ft Rayito Lozano "El Palomito"</h3><p></p></div>
+</div>
+```
+
   </div>
 </section>
 
 <section id="ubicacion" class="ubicacion animar">
   <h2>Ubicación</h2>
+
+  <!-- CORREGIDO -->
 
   <iframe 
     src="https://www.google.com/maps?q=Salon+Naturafrut+San+Pedro+Tapanatepec+Oaxaca&output=embed"
@@ -146,6 +203,24 @@ h1, h2, h3 {
   <a class="boton" href="https://maps.app.goo.gl/AzddTkKKnSyDaCb99" target="_blank">
     Ver en Google Maps
   </a>
+</section>
+
+<section id="confirmacion" class="confirmacion animar">
+  <h2>Confirma tu asistencia</h2>
+
+  <div class="bloque-codigo">
+    <input type="text" id="codigoInvitacion" placeholder="Código de invitación">
+    <button onclick="validarCodigo()">Validar código</button>
+    <p id="mensajeCodigo"></p>
+    <button onclick="borrarConfirmacion()">Borrar prueba</button>
+  </div>
+
+  <div id="formularioAsistencia">
+    <input type="text" placeholder="Nombre">
+    <input type="number" placeholder="Asistentes">
+    <textarea placeholder="Mensaje"></textarea>
+    <button>Confirmar</button>
+  </div>
 </section>
 
 <footer class="animar">
@@ -161,7 +236,7 @@ h1, h2, h3 {
 <script src="script.js"></script>
 
 <script>
-/* SCROLL ANIMATION */
+/* SCROLL */
 const els = document.querySelectorAll('.animar');
 window.addEventListener('scroll', () => {
   els.forEach(el => {
