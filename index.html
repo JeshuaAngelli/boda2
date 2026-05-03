@@ -10,12 +10,12 @@
 
 <!-- FUENTES -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Jost&display=swap" rel="stylesheet">
 
 <style>
 body { font-family: 'Poppins', sans-serif; }
 h1,h2,h3 { font-family: 'Playfair Display', serif; }
 
-/* ANIMACIONES */
 .animar {
   opacity: 0;
   transform: translateY(40px);
@@ -26,15 +26,6 @@ h1,h2,h3 { font-family: 'Playfair Display', serif; }
   transform: translateY(0);
 }
 
-/* BOTONES */
-.boton, .boton-portada {
-  transition: 0.3s ease;
-}
-.boton:hover, .boton-portada:hover {
-  transform: scale(1.05);
-}
-
-/* PÉTALOS */
 .petalo {
   position: fixed;
   top: -10px;
@@ -46,7 +37,6 @@ h1,h2,h3 { font-family: 'Playfair Display', serif; }
   animation: caer linear infinite;
 }
 @keyframes caer {
-  0% { transform: translateY(0); }
   100% { transform: translateY(100vh); }
 }
 </style>
@@ -55,75 +45,58 @@ h1,h2,h3 { font-family: 'Playfair Display', serif; }
 
 <body class="no-scroll">
 
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Save the Date - Mari & Simon</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<!-- ========================= -->
+<!-- SOBRE CODEPEN -->
+<!-- ========================= -->
 
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<div class="scene" id="scene">
+  <div class="envelope">
 
-    <div class="scene" id="scene">
-        
-        <div class="envelope">
-            
-            <!-- CAPA 1: Fondo interior -->
-            <div class="layer env-back"></div>
+    <div class="layer env-back"></div>
 
-            <!-- CAPA 2: La Tarjeta (Ahora es Blanca con texto Oliva) -->
-            <div class="layer env-card" id="card">
-                <div class="card-content">
-                    <p class="card-pre olive-text">Save the Date</p>
-                    <h2 class="card-title olive-text">M & S</h2>
-                </div>
-            </div>
-
-            <!-- CAPA 3: Solapas Fijas (Forman el bolsillo) -->
-            <div class="layer flap-wrapper flap-top-wrapper">
-                <div class="flap-shape flap-top"></div>
-            </div>
-
-            <div class="layer flap-wrapper flap-bottom-wrapper">
-                <div class="flap-shape flap-bottom"></div>
-            </div>
-
-            <div class="layer flap-wrapper flap-left-wrapper">
-                <div class="flap-shape flap-left"></div>
-                <!-- Monograma exterior: Más pegado al borde y dorado -->
-                <div class="monogram-outer gold-text">M & S</div>
-            </div>
-
-            <!-- CAPA 4: Solapa Principal (Se abre) -->
-            <div class="layer flap-wrapper env-flap-main" id="flap">
-                <div class="flap-shape flap-right"></div>
-                
-                <!-- Sello Dorado -->
-                <div class="wax-seal" id="seal">
-                    <div class="wax-seal-inner">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 21.5c-1.5 0-3-.5-4.5-1.5-2-1.5-4.5-5-5-10 0-1.5.5-2.5 1.5-3.5 1.5-1.5 3-2 5-2 .5 0 1 .5 1.5 1 .5.5 1 1 1.5 2 1-1.5 2-3 3.5-3 2 0 3.5.5 5 2 1 1 1.5 2 1.5 3.5-.5 5-3 8.5-5 10-1.5 1-3 1.5-4.5 1.5zm-5.5-15c-.5.5-.5 1-.5 2 0 4 2 7 4 8.5 1 .5 2 1 2 1s1-.5 2-1c2-1.5 4-4.5 4-8.5 0-1 0-1.5-.5-2-1-1-2-1-3.5 0-1 1-1.5 2-1.5 3 0 .5-.5 1-1 1s-1-.5-1-1c0-1-.5-2-1.5-3-1.5-1-2.5-1-3 0z"/>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-
-        </div>
+    <div class="layer env-card" id="card">
+      <div class="card-content">
+        <p class="card-pre olive-text">Save the Date</p>
+        <h2 class="card-title olive-text">J & A</h2>
+      </div>
     </div>
 
-    <!-- Pantalla Blanca de Transición -->
-    <div class="transition-screen" id="transition-screen"></div>
+    <div class="layer flap-wrapper flap-top-wrapper">
+      <div class="flap-shape flap-top"></div>
+    </div>
 
-    <script src="script.js"></script>
-</body>
-</html>
+    <div class="layer flap-wrapper flap-bottom-wrapper">
+      <div class="flap-shape flap-bottom"></div>
+    </div>
+
+    <div class="layer flap-wrapper flap-left-wrapper">
+      <div class="flap-shape flap-left"></div>
+      <div class="monogram-outer gold-text">J & A</div>
+    </div>
+
+    <div class="layer flap-wrapper env-flap-main" id="flap">
+      <div class="flap-shape flap-right"></div>
+
+      <div class="wax-seal" id="seal">
+        <div class="wax-seal-inner">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 21.5c-1.5 0-3-.5-4.5-1.5-2-1.5-4.5-5-5-10 0-1.5.5-2.5 1.5-3.5 1.5-1.5 3-2 5-2 .5 0 1 .5 1.5 1 .5.5 1 1 1.5 2 1-1.5 2-3 3.5-3 2 0 3.5.5 5 2 1 1 1.5 2 1.5 3.5-.5 5-3 8.5-5 10-1.5 1-3 1.5-4.5 1.5z"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="transition-screen" id="transition-screen"></div>
+
+<!-- ========================= -->
+<!-- NAV -->
+<!-- ========================= -->
+
 <nav class="animar">
-  <a class="logo-privado" href="#" target="_blank">J&A</a>
+  <a class="logo-privado">J&A</a>
   <div>
     <a href="#inicio">Inicio</a>
     <a href="#historia">Historia</a>
@@ -133,164 +106,89 @@ h1,h2,h3 { font-family: 'Playfair Display', serif; }
   </div>
 </nav>
 
+<!-- ========================= -->
+<!-- PORTADA -->
+<!-- ========================= -->
+
 <section id="inicio" class="portada animar">
   <div class="contenedor-portada">
-
-    <img class="foto-lateral foto-izquierda" src="IMG_4879.jpeg" alt="Foto izquierda">
-
+    <img class="foto-lateral" src="IMG_4879.jpeg">
     <div class="tarjeta-portada">
-      <span class="decoracion">❦</span>
       <h1>Nos casamos</h1>
       <p class="nombres">Jeshua & Angelli</p>
       <p class="fecha">30 · MAYO · 2026</p>
-      <p class="frase-portada">Nos encantaría que formaras parte de este día</p>
-      <a class="boton-portada" href="#detalles">Ver detalles</a>
     </div>
-
-    <img class="foto-lateral foto-derecha" src="IMG_4882.jpeg" alt="Foto derecha">
-
+    <img class="foto-lateral" src="IMG_4882.jpeg">
   </div>
 </section>
+
+<!-- ========================= -->
+<!-- HISTORIA + CARRUSEL -->
+<!-- ========================= -->
 
 <section id="historia" class="historia animar">
-  <div class="historia-contenido">
 
-    <div class="historia-texto">
-      <h2> comienza nuestra historia</h2>
+  <div class="historia-galeria">
+    <button onclick="moverCarrusel(-1)">&#10094;</button>
 
-      <div class="poema-amor">
-        <p>Te elegí sin ruido,<br>como florece la mañana,<br>poco a poco,<br>llenándolo todo de luz.</p>
-        <p>Y en tus ojos encontré<br>un lugar donde quedarme,<br>un hogar sereno,<br>una vida compartida.</p>
-        <p>Si el amor tiene forma,<br>la nuestra está hecha<br>de abrazos, paciencia,<br>promesas y destino.</p>
-      </div>
+    <div class="carrusel-fotos" id="carruselFotos">
+      <img src="IMG_1.jpg" class="foto-carrusel activa">
+      <img src="IMG_2.jpg" class="foto-carrusel">
+      <img src="IMG_3.jpg" class="foto-carrusel">
+      <img src="IMG_4.jpg" class="foto-carrusel">
     </div>
 
-    <div class="historia-galeria">
-      <button class="flecha flecha-izquierda" onclick="moverCarrusel(-1)">&#10094;</button>
-
-      <div class="carrusel-fotos" id="carruselFotos">
-        <img src="IMG_1.jpg" class="foto-carrusel activa">
-        <img src="IMG_2.jpg" class="foto-carrusel">
-        <img src="IMG_3.jpg" class="foto-carrusel">
-        <img src="IMG_4.jpg" class="foto-carrusel">  
-        <img src="IMG_5.jpg" class="foto-carrusel">
-        <img src="IMG_6.jpg" class="foto-carrusel">
-        <img src="IMG_7.jpg" class="foto-carrusel">
-        <img src="IMG_8.jpg" class="foto-carrusel">  
-        <img src="IMG_9.jpg" class="foto-carrusel">
-        <img src="IMG_10.jpg" class="foto-carrusel">
-        <img src="IMG_11.jpg" class="foto-carrusel">
-      </div>
-
-      <button class="flecha flecha-derecha" onclick="moverCarrusel(1)">&#10095;</button>
-    </div>
-
+    <button onclick="moverCarrusel(1)">&#10095;</button>
   </div>
+
 </section>
+
+<!-- ========================= -->
+<!-- DETALLES -->
+<!-- ========================= -->
 
 <section id="detalles" class="detalles animar">
-  <h2>Detalles de la Boda</h2>
+  <h2>Detalles</h2>
 
-  <div class="cuenta-detalles">
-    <p>Faltan</p>
-
-    <div class="contador-detalles">
-      <div><strong id="dias">0</strong><span>Días</span></div>
-      <div><strong id="horas">0</strong><span>Horas</span></div>
-      <div><strong id="minutos">0</strong><span>Minutos</span></div>
-      <div><strong id="segundos">0</strong><span>Segundos</span></div>
-    </div>
-
-    <p>para el gran día</p>
+  <div>
+    <strong id="dias">0</strong>
+    <strong id="horas">0</strong>
+    <strong id="minutos">0</strong>
+    <strong id="segundos">0</strong>
   </div>
 
-  <div class="contenedor-detalles">
-    <div class="detalle">
-      <h3>Fecha y hora</h3>
-      <p>sábado, 30 de mayo de 2026<br>01:00 PM</p>
-    </div>
-
-    <div class="detalle">
-      <h3>Lugar</h3>
-      <p>Salón Natura Frut<br>San Pedro Tapanatepec, Oaxaca</p>
-    </div>
-
-    <div class="detalle">
-      <h3>Código de vestimenta</h3>
-      <p>Ven como quieras,<br>pero ven</p>
-    </div>
-  </div>
 </section>
 
-<section id="programa" class="programa animar">
-  <h2>Programa del día</h2>
+<!-- ========================= -->
+<!-- UBICACIÓN -->
+<!-- ========================= -->
 
-  <div class="linea-programa">
-    <div class="momento">
-      <span>1:00 PM</span>
-      <div><h3>Recepción</h3><p>Comienza nuestro gran día.</p></div>
-    </div>
-
-    <div class="momento">
-      <span>4:30 PM</span>
-      <div><h3>Protocolo</h3><p>Un momento para compartir.</p></div>
-    </div>
-
-    <div class="momento">
-      <span>5:30 PM</span>
-      <div><h3>Celebración</h3><p>Disfrutaremos juntos de una tarde especial.</p></div>
-    </div>
-  </div>
-</section>
-
-<section id="ubicacion" class="ubicacion animar">
-  <h2>Ubicación</h2>
-
-  <iframe 
-    src="https://www.google.com/maps?q=Salon+Naturafrut+San+Pedro+Tapanatepec+Oaxaca&output=embed"
-    width="100%" height="300" style="border-radius:20px;" loading="lazy">
-  </iframe>
-
-  <br><br>
-
-  <a class="boton" href="https://maps.app.goo.gl/AzddTkKKnSyDaCb99" target="_blank">
-    Ver en Google Maps
-  </a>
+<section id="ubicacion" class="animar">
+  <iframe src="https://www.google.com/maps?q=Salon+Naturafrut+San+Pedro+Tapanatepec+Oaxaca&output=embed" width="100%" height="300"></iframe>
 </section>
 
 <footer class="animar">
   <p>JESHUA & ANGELLI</p>
 </footer>
 
+<!-- ========================= -->
+<!-- AUDIO -->
+<!-- ========================= -->
+
 <audio id="musicaFondo" loop>
   <source src="https://raw.githubusercontent.com/francispain/boda-audio/main/paulyudin-romantic-wedding-piano-160698.mp3">
-  
 </audio>
+
 <audio id="sonidoSobre">
   <source src="https://assets.mixkit.co/active_storage/sfx/212/212-preview.mp3">
 </audio>
-<button id="botonMusica" onclick="controlarMusica()">♫ Música</button>
+
+<button onclick="controlarMusica()">♫ Música</button>
 
 <script src="script.js"></script>
 
 <script>
-function abrirSobre() {
-  const sobre = document.querySelector('.envelope');
-  const overlay = document.getElementById('overlay');
-
-  sobre.classList.add('abierto');
-
-  setTimeout(() => {
-    overlay.style.opacity = '0';
-    overlay.style.transition = 'opacity 0.8s ease';
-  }, 600);
-
-  setTimeout(() => {
-    overlay.style.display = 'none';
-  }, 1400);
-}
-
-/* SCROLL */
+// animaciones scroll
 const els = document.querySelectorAll('.animar');
 window.addEventListener('scroll', () => {
   els.forEach(el => {
@@ -300,7 +198,7 @@ window.addEventListener('scroll', () => {
   });
 });
 
-/* PÉTALOS */
+// pétalos
 for (let i = 0; i < 25; i++) {
   let p = document.createElement("div");
   p.className = "petalo";
