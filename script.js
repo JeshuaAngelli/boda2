@@ -1,5 +1,5 @@
 // =========================
-// SOBRE CODEPEN + REVELACIÓN PERFECTA
+// SOBRE CODEPEN PRO
 // =========================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (animando) return;
     animando = true;
 
-    // 1. abrir sobre
+    // 1. abrir solapa
     flap.classList.add('is-opening');
 
     // 2. sacar carta
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, 1000);
 
-    // 4. zoom
+    // 4. zoom escena
     setTimeout(() => {
       scene.classList.add('is-zooming');
     }, 1600);
@@ -47,24 +47,16 @@ document.addEventListener('DOMContentLoaded', () => {
       transitionScreen.classList.add('is-fading');
     }, 2200);
 
-    // =========================
-    // 🔥 REVELACIÓN FINAL REAL
-    // =========================
+    // 6. mostrar contenido
     setTimeout(() => {
 
-      // quitar sobre COMPLETAMENTE
       if (scene) scene.remove();
       if (transitionScreen) transitionScreen.remove();
 
-      // mostrar contenido
-      if (contenido) {
-        contenido.classList.add('visible');
-      }
+      if (contenido) contenido.classList.add('visible');
 
-      // desbloquear scroll
       document.body.classList.remove('no-scroll');
 
-      // ir arriba SIEMPRE
       window.scrollTo(0, 0);
 
     }, 3200);
@@ -90,10 +82,15 @@ function actualizarCuentaAtras() {
   const minutos = Math.floor((diferencia / (1000 * 60)) % 60);
   const segundos = Math.floor((diferencia / 1000) % 60);
 
-  document.getElementById("dias").textContent = dias.toString().padStart(2,"0");
-  document.getElementById("horas").textContent = horas.toString().padStart(2,"0");
-  document.getElementById("minutos").textContent = minutos.toString().padStart(2,"0");
-  document.getElementById("segundos").textContent = segundos.toString().padStart(2,"0");
+  const set = (id, val) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = val.toString().padStart(2, "0");
+  };
+
+  set("dias", dias);
+  set("horas", horas);
+  set("minutos", minutos);
+  set("segundos", segundos);
 }
 
 setInterval(actualizarCuentaAtras, 1000);
@@ -113,13 +110,42 @@ function actualizarCarrusel() {
   fotos[indiceCarrusel].classList.add("activa");
 }
 
-function moverCarrusel(dir) {
+function moverCarrusel(direccion) {
   const fotos = document.querySelectorAll(".foto-carrusel");
   if (!fotos.length) return;
 
-  indiceCarrusel = (indiceCarrusel + dir + fotos.length) % fotos.length;
+  indiceCarrusel = (indiceCarrusel + direccion + fotos.length) % fotos.length;
   actualizarCarrusel();
 }
+
+
+// =========================
+// SWIPE MÓVIL
+// =========================
+
+window.addEventListener("load", () => {
+
+  actualizarCuentaAtras();
+  actualizarCarrusel();
+
+  const carrusel = document.getElementById("carruselFotos");
+
+  if (!carrusel) return;
+
+  let inicioX = 0;
+
+  carrusel.addEventListener("touchstart", (e) => {
+    inicioX = e.changedTouches[0].clientX;
+  });
+
+  carrusel.addEventListener("touchend", (e) => {
+    const finX = e.changedTouches[0].clientX;
+
+    if (inicioX - finX > 40) moverCarrusel(1);
+    if (finX - inicioX > 40) moverCarrusel(-1);
+  });
+
+});
 
 
 // =========================
@@ -128,8 +154,15 @@ function moverCarrusel(dir) {
 
 function controlarMusica() {
   const musica = document.getElementById("musicaFondo");
+  const boton = document.getElementById("botonMusica");
+
   if (!musica) return;
 
-  if (musica.paused) musica.play();
-  else musica.pause();
+  if (musica.paused) {
+    musica.play();
+    if (boton) boton.textContent = "❚❚ Pausar";
+  } else {
+    musica.pause();
+    if (boton) boton.textContent = "♫ Música";
+  }
 }
