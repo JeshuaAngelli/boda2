@@ -3,7 +3,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // =========================
-  // ELEMENTOS
+  // ELEMENTOS SOBRE CODEPEN
   // =========================
 
   const seal = document.getElementById('seal');
@@ -17,62 +17,61 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let animando = false;
 
-  if (!seal) return;
+  if (seal) {
+    seal.addEventListener('click', () => {
 
-  // =========================
-  // CLICK SOBRE
-  // =========================
+      if (animando) return;
+      animando = true;
 
-  seal.addEventListener('click', () => {
-
-    if (animando) return;
-    animando = true;
-
-    // 🔊 sonido sobre
-    if (sonido) {
-      sonido.volume = 0.5;
-      sonido.play().catch(()=>{});
-    }
-
-    // 1. abrir solapa
-    flap.classList.add('is-opening');
-
-    // 2. sacar carta (efecto físico)
-    setTimeout(() => {
-      card.classList.add('is-lifted');
-    }, 800);
-
-    // 🎵 música
-    setTimeout(() => {
-      if (musica) {
-        musica.volume = 0.1;
-        musica.play().catch(()=>{});
+      // 🔊 sonido sobre
+      if (sonido) {
+        sonido.volume = 0.5;
+        sonido.play().catch(()=>{});
       }
-    }, 1000);
 
-    // 3. zoom escena
-    setTimeout(() => {
-      scene.classList.add('is-zooming');
-    }, 1600);
+      // 1. abrir solapa
+      flap.classList.add('is-opening');
 
-    // 4. fade blanco
-    setTimeout(() => {
-      transitionScreen.classList.add('is-fading');
-    }, 2200);
+      // 2. sacar carta
+      setTimeout(() => {
+        card.classList.add('is-lifted');
+      }, 800);
 
-    // 5. mostrar tu página (scroll arriba)
-    setTimeout(() => {
-      document.body.style.overflow = "auto";
-      window.scrollTo(0, 0);
-    }, 3000);
+      // 🎵 música
+      setTimeout(() => {
+        if (musica) {
+          musica.volume = 0.1;
+          musica.play().catch(()=>{});
+        }
+      }, 1000);
 
-  });
+      // 3. zoom escena
+      setTimeout(() => {
+        scene.classList.add('is-zooming');
+      }, 1600);
+
+      // 4. fade blanco
+      setTimeout(() => {
+        transitionScreen.classList.add('is-fading');
+      }, 2200);
+
+      // 5. MOSTRAR TU WEB (FIX IMPORTANTE)
+      setTimeout(() => {
+        transitionScreen.style.display = "none";
+        scene.style.display = "none"; // 🔥 oculta el sobre
+
+        document.body.style.overflow = "auto";
+        window.scrollTo(0, 0);
+      }, 3500);
+
+    });
+  }
 
 });
 
 
 // =========================
-// CONTADOR (TU BODA)
+// CONTADOR
 // =========================
 
 function actualizarCuentaAtras() {
@@ -119,7 +118,7 @@ function controlarMusica() {
 
 
 // =========================
-// CARRUSEL (TUYO)
+// CARRUSEL (ESTABLE)
 // =========================
 
 let indiceCarrusel = 0;
