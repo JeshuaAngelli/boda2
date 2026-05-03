@@ -1,3 +1,50 @@
+/**
+ * REDIRECCIÓN FINAL
+ */
+const TARGET_URL = 'https://tu-pagina-de-boda.com/inicio';
+
+document.addEventListener('DOMContentLoaded', () => {
+    
+    const seal = document.getElementById('seal');
+    const flapWrapper = document.getElementById('flap');
+    const card = document.getElementById('card');
+    const scene = document.getElementById('scene');
+    const transitionScreen = document.getElementById('transition-screen');
+
+    let isAnimating = false;
+
+    seal.addEventListener('click', () => {
+        if (isAnimating) return;
+        isAnimating = true;
+
+        // 1. [0ms] Abre la solapa derecha en 3D
+        flapWrapper.classList.add('is-opening');
+
+        // 2. [800ms] SACA LA TARJETA: Aquí ocurre la magia del Z-Index.
+        // La tarjeta pasa a z-index 20 y se desliza físicamente por sobre las solapas
+        setTimeout(() => {
+            card.classList.add('is-lifted');
+        }, 800);
+
+        // 3. [1550ms] Inicia el zoom hacia la tarjeta blanca ya extraída
+        setTimeout(() => {
+            scene.classList.add('is-zooming');
+        }, 1550);
+
+        // 4. [2200ms] Fundido blanco suave
+        setTimeout(() => {
+            transitionScreen.classList.add('is-fading');
+        }, 2200);
+
+        // 5. [3300ms] Redirección
+        setTimeout(() => {
+            // Elimina los comentarios para habilitarlo en la web real:
+            // window.location.href = TARGET_URL;
+            
+            console.log('Secuencia terminada. Redirigiendo a:', TARGET_URL);
+        }, 3300);
+    });
+});
 // 🔥 SOBRE
 document.body.classList.add("no-scroll");
 
