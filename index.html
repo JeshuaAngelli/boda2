@@ -125,90 +125,256 @@ nav a {
 
 <body>
 
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boda Jeshua & Angelli</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
 <nav>
-  <a href="#">J&A</a>
+  <a class="logo-privado" href="https://docs.google.com/spreadsheets/d/16ob_KtGP0o8lPybOJRXrYS-tIvXSdL5yiPvvIEunbf8/edit?gid=0#gid=0" target="_blank">J&A</a>
   <div>
     <a href="#inicio">Inicio</a>
     <a href="#historia">Historia</a>
     <a href="#detalles">Detalles</a>
+    <a href="#programa">Programa</a>
+    <a href="#ubicacion">Ubicación</a>
   </div>
 </nav>
 
 <section id="inicio" class="portada">
-  <div class="tarjeta-portada">
-    <h1>Nos casamos</h1>
-    <p class="nombres">Jeshua & Angelli</p>
-    <p class="fecha">30 · MAYO · 2026</p>
-    <a class="boton-portada" href="#detalles">Ver detalles</a>
+  <div class="contenedor-portada">
+
+```
+<img class="foto-lateral foto-izquierda" src="IMG_5777.PNG" alt="Foto izquierda">
+
+<div class="tarjeta-portada">
+  <span class="decoracion">❦</span>
+  <h1>Nos casamos</h1>
+  <p class="nombres">Jeshua & Angelli</p>
+  <p class="fecha">30 · MAYO · 2026</p>
+  <p class="frase-portada">Nos encantaría que formaras parte de este día</p>
+  <a class="boton-portada" href="#detalles">Ver detalles</a>
+</div>
+
+<img class="foto-lateral foto-derecha" src="IMG_5777.PNG" alt="Foto derecha">
+```
+
   </div>
 </section>
 
 <section id="historia" class="historia">
-  <h2>Nuestra historia</h2>
+  <div class="historia-contenido">
+
+```
+<div class="historia-texto">
+  <h2> comienza nuestra historia</h2>
+  <p class="intro-historia"></p>
+
+  <div class="poema-amor">
+    <p>
+      Te elegí sin ruido,<br>
+      como florece la mañana,<br>
+      poco a poco,<br>
+      llenándolo todo de luz.
+    </p>
+
+    <p>
+      Y en tus ojos encontré<br>
+      un lugar donde quedarme,<br>
+      un hogar sereno,<br>
+      una vida compartida.
+    </p>
+
+    <p>
+      Si el amor tiene forma,<br>
+      la nuestra está hecha<br>
+      de abrazos, paciencia,<br>
+      promesas y destino.
+    </p>
+  </div>
+</div>
+
+<div class="historia-galeria">
+  <button class="flecha flecha-izquierda" onclick="moverCarrusel(-1)">&#10094;</button>
 
   <div class="carrusel-fotos" id="carruselFotos">
-    <img src="IMG_5777.PNG" class="activa">
-    <img src="IMG_5777.PNG">
-    <img src="IMG_5777.PNG">
+    <img src="IMG_5777.PNG" alt="Foto 1" class="foto-carrusel activa">
+    <img src="IMG_5777.PNG" alt="Foto 2" class="foto-carrusel">
+    <img src="IMG_5777.PNG" alt="Foto 3" class="foto-carrusel">
   </div>
 
-<br><br> <button onclick="moverCarrusel(-1)">⬅</button> <button onclick="moverCarrusel(1)">➡</button>
+  <button class="flecha flecha-derecha" onclick="moverCarrusel(1)">&#10095;</button>
+</div>
+```
 
+  </div>
 </section>
 
 <section id="detalles" class="detalles">
-  <h2>Cuenta regresiva</h2>
+  <h2>Detalles de la Boda</h2>
 
-  <div class="contador-detalles">
-    <div><strong id="dias">0</strong><br>Días</div>
-    <div><strong id="horas">0</strong><br>Horas</div>
-    <div><strong id="minutos">0</strong><br>Minutos</div>
-    <div><strong id="segundos">0</strong><br>Segundos</div>
+  <div class="cuenta-detalles">
+    <p>Faltan</p>
+
+```
+<div class="contador-detalles">
+  <div>
+    <strong id="dias">0</strong>
+    <span>Días</span>
+  </div>
+
+  <div>
+    <strong id="horas">0</strong>
+    <span>Horas</span>
+  </div>
+
+  <div>
+    <strong id="minutos">0</strong>
+    <span>Minutos</span>
+  </div>
+
+  <div>
+    <strong id="segundos">0</strong>
+    <span>Segundos</span>
+  </div>
+</div>
+
+<p>para el gran día</p>
+```
+
+  </div>
+
+  <div class="contenedor-detalles">
+    <div class="detalle">
+      <h3>Fecha y hora</h3>
+      <p>sabado, 30 de mayo de 2026<br>01:00 PM h</p>
+    </div>
+
+```
+<div class="detalle">
+  <h3>Lugar</h3>
+  <p>Salon naturafrut<br>San Pedro Tapanatepec, Oaxaca</p>
+</div>
+
+<div class="detalle">
+  <h3>Código de vestimenta</h3>
+  <p>Ven como quieras,<br>pero ven</p>
+</div>
+```
+
   </div>
 </section>
+
+<section id="programa" class="programa">
+  <h2>Programa del día</h2>
+
+  <div class="linea-programa">
+    <div class="momento">
+      <span>1:00 PM</span>
+      <div>
+        <h3>Recepcion</h3>
+        <p>Comienza nuestro gran día.</p>
+      </div>
+    </div>
+
+```
+<div class="momento">
+  <span>4:30 PM </span>
+  <div>
+    <h3>Protocolo</h3>
+    <p>Un momento para compartir.</p>
+  </div>
+</div>
+
+<div class="momento">
+  <span>22:00</span>
+  <div>
+    <h3>Celebración</h3>
+    <p>Disfrutaremos juntos de una tarde especial.</p>
+  </div>
+</div>
+
+<div class="momento">
+  <span>Intervencion musical </span>
+  <div>
+    <h3>coco Show Ft Rayito Lozano "El Palomito"</h3>
+    <p></p>
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<section id="ubicacion" class="ubicacion">
+  <h2>Ubicación</h2>
+
+  <!-- IFRAME CORREGIDO -->
+
+  <iframe 
+    src="https://www.google.com/maps?q=Salon+Naturafrut+San+Pedro+Tapanatepec+Oaxaca&output=embed"
+    width="100%" 
+    height="300" 
+    style="border:0; border-radius:20px;" 
+    allowfullscreen 
+    loading="lazy">
+  </iframe>
+
+<br><br>
+
+  <a class="boton" href="https://maps.app.goo.gl/AzddTkKKnSyDaCb99" target="_blank">
+    Ver en Google Maps
+  </a>
+</section>
+
+<section id="confirmacion" class="confirmacion">
+  <h2>Confirma tu asistencia</h2>
+
+  <p>Para ayudarnos a organizarlo todo, confirma tu asistencia con el código de tu invitación.</p>
+
+  <div class="bloque-codigo">
+    <input type="text" id="codigoInvitacion" placeholder="Código de invitación">
+    <button onclick="validarCodigo()">Validar código</button>
+    <p id="mensajeCodigo" class="mensaje-codigo"></p>
+    <button onclick="borrarConfirmacion()">Borrar prueba</button>
+  </div>
+
+  <div id="formularioAsistencia" class="formulario-asistencia">
+    <input type="text" id="nombreInvitado" placeholder="Nombre y apellidos">
+    <input type="number" id="numeroAsistentes" placeholder="Número de asistentes" min="1">
+    <textarea id="intolerancias" placeholder="Intolerancias o alergias alimentarias"></textarea>
+    <textarea id="mensajeInvitado" placeholder="Mensaje opcional para los novios"></textarea>
+    <button onclick="confirmarAsistencia()">Confirmar por WhatsApp</button>
+  </div>
+</section>
+
+<footer>
+  <p>JESHUA & ANGELLI </p>
+  <span>Gracias por formar parte de nuestra historia.<br>Los esperamos con muchísima ilusión.</span>
+</footer>
 
 <audio id="musicaFondo" loop>
   <source src="https://raw.githubusercontent.com/francispain/boda-audio/main/paulyudin-romantic-wedding-piano-160698.mp3" type="audio/mpeg">
 </audio>
 
-<button class="boton-musica" onclick="controlarMusica()">♫</button>
+<button id="botonMusica" class="boton-musica" onclick="controlarMusica()">
+  ♫ Música
+</button>
 
-<script>
-/* CARRUSEL */
-let index = 0;
-function moverCarrusel(dir) {
-  const fotos = document.querySelectorAll("#carruselFotos img");
-  fotos[index].classList.remove("activa");
-  index = (index + dir + fotos.length) % fotos.length;
-  fotos[index].classList.add("activa");
-}
+<script src="script.js"></script>
 
-/* CONTADOR */
-const fechaBoda = new Date("May 30, 2026 13:00:00").getTime();
+</body>
+</html>
 
-setInterval(() => {
-  const ahora = new Date().getTime();
-  const diferencia = fechaBoda - ahora;
-
-  document.getElementById("dias").innerText = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-  document.getElementById("horas").innerText = Math.floor((diferencia / (1000 * 60 * 60)) % 24);
-  document.getElementById("minutos").innerText = Math.floor((diferencia / (1000 * 60)) % 60);
-  document.getElementById("segundos").innerText = Math.floor((diferencia / 1000) % 60);
-}, 1000);
-
-/* MUSICA */
-let musica = document.getElementById("musicaFondo");
-let reproduciendo = false;
-
-function controlarMusica() {
-  if (reproduciendo) {
-    musica.pause();
-  } else {
-    musica.play();
-  }
-  reproduciendo = !reproduciendo;
-}
-</script>
 
 </body>
 </html>
