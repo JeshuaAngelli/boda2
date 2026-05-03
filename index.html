@@ -20,7 +20,7 @@ h1,h2,h3 { font-family: 'Playfair Display', serif; }
 .animar {
   opacity: 0;
   transform: translateY(40px);
-  transition: all 1s ease;
+  transition: all 0.5s ease;
 }
 .animar.visible {
   opacity: 1;
@@ -177,13 +177,13 @@ h1,h2,h3 { font-family: 'Playfair Display', serif; }
 </div>
 
 <div class="momento">
-  <span>22:00</span>
+  <span>05:30 Pm </span>
   <div><h3>Celebración</h3><p>Disfrutaremos juntos de una tarde especial.</p></div>
 </div>
 
 <div class="momento">
   <span>Intervencion musical</span>
-  <div><h3>coco Show Ft Rayito Lozano "El Palomito"</h3><p></p></div>
+  <div><h3>Banda Coco Ft Rayito Lozano "El Palomito"</h3><p></p></div>
 </div>
 ```
 
@@ -207,23 +207,7 @@ h1,h2,h3 { font-family: 'Playfair Display', serif; }
   </a>
 </section>
 
-<section id="confirmacion" class="confirmacion animar">
-  <h2>Confirma tu asistencia</h2>
 
-  <div class="bloque-codigo">
-    <input type="text" id="codigoInvitacion" placeholder="Código de invitación">
-    <button onclick="validarCodigo()">Validar código</button>
-    <p id="mensajeCodigo"></p>
-    <button onclick="borrarConfirmacion()">Borrar prueba</button>
-  </div>
-
-  <div id="formularioAsistencia">
-    <input type="text" placeholder="Nombre">
-    <input type="number" placeholder="Asistentes">
-    <textarea placeholder="Mensaje"></textarea>
-    <button>Confirmar</button>
-  </div>
-</section>
 
 <footer class="animar">
   <p>JESHUA & ANGELLI</p>
