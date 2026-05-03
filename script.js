@@ -1,75 +1,45 @@
-const URL_GOOGLE_SHEETS = "https://script.google.com/macros/s/AKfycbw8ifKayg2Kf3bAiAVTBiIr6fHzhqVKkQtJszHOOZFnP6hcnTK5JZcmkr5Lm8qaICyr/exec";
+// 🔥 SOBRE
+document.body.classList.add("no-scroll");
 
-let codigoValidado = "";
+const sobre = document.getElementById("sobre");
+const wrapper = document.getElementById("envelope-wrapper");
+const musica = document.getElementById("musicaFondo");
 
-function validarCodigo() {
-  const codigo = document.getElementById("codigoInvitacion").value.trim().toUpperCase();
-  const formulario = document.getElementById("formularioAsistencia");
-  const mensajeCodigo = document.getElementById("mensajeCodigo");
+sobre.addEventListener("click", () => {
 
-  const codigosValidos = ["I1", "I2", "I3", "I4", "I5", "I6", "I7", "I8", "I9", "I10"];
+  // abrir sobre
+  sobre.classList.add("open");
 
-  if (codigosValidos.includes(codigo)) {
-    if (localStorage.getItem(codigo + "_confirmado") === "true") {
-      mensajeCodigo.textContent = "Esta invitación ya ha sido confirmada.";
-      formulario.style.display = "none";
-      return;
-    }
-
-    codigoValidado = codigo;
-    mensajeCodigo.textContent = "Código validado correctamente. Ya puedes confirmar tu asistencia.";
-    formulario.style.display = "flex";
-  } else {
-    mensajeCodigo.textContent = "Código incorrecto. Revisa tu invitación.";
-    formulario.style.display = "none";
-  }
-}
-
-function confirmarAsistencia() {
-  const nombre = document.getElementById("nombreInvitado").value.trim();
-  const asistentes = document.getElementById("numeroAsistentes").value.trim();
-  const intolerancias = document.getElementById("intolerancias").value.trim();
-  const mensaje = document.getElementById("mensajeInvitado").value.trim();
-
-  if (nombre === "" || asistentes === "") {
-    alert("Por favor, indica tu nombre y el número de asistentes.");
-    return;
+  // música
+  if (musica) {
+    musica.volume = 0.3;
+    musica.play().catch(()=>{});
   }
 
-  const mensajeWhatsApp =
-    `Hola, confirmo mi asistencia a la boda de Luis & Carolina.\n\n` +
-    `Nombre: ${nombre}\n` +
-    `Asistentes: ${asistentes}\n` +
-    `Intolerancias o alergias: ${intolerancias || "Ninguna"}\n` +
-    `Mensaje para los novios: ${mensaje || "Sin mensaje adicional"}\n\n` +
-    `¡Nos vemos el gran día!`;
+  // cerrar overlay
+  setTimeout(() => {
+    wrapper.style.opacity = "0";
+    wrapper.style.transition = "opacity 0.6s ease";
+    document.body.classList.remove("no-scroll");
 
-localStorage.setItem(codigoValidado + "_confirmado", "true");
+    setTimeout(() => {
+      wrapper.style.display = "none";
+    }, 600);
 
-fetch(URL_GOOGLE_SHEETS, {
-  method: "POST",
-  mode: "no-cors",
-  body: JSON.stringify({
-    codigo: codigoValidado,
-    asistentes: asistentes,
-    intolerancias: intolerancias || "Ninguna",
-    mensaje: mensaje || "Sin mensaje adicional"
-  })
+  }, 900);
 });
 
-  window.open(`https://wa.me/34638063888?text=${encodeURIComponent(mensajeWhatsApp)}`, "_blank");
-}
 
+// 🔥 CONTADOR
 function actualizarCuentaAtras() {
- const fechaBoda = new Date(2026, 4, 30, 13, 0, 0).getTime();
+  const fechaBoda = new Date(2026, 4, 30, 13, 0, 0).getTime();
   const ahora = new Date().getTime();
   const diferencia = fechaBoda - ahora;
 
   if (diferencia <= 0) {
-    document.getElementById("dias").textContent = "0";
-    document.getElementById("horas").textContent = "0";
-    document.getElementById("minutos").textContent = "0";
-    document.getElementById("segundos").textContent = "0";
+    ["dias","horas","minutos","segundos"].forEach(id=>{
+      document.getElementById(id).textContent = "0";
+    });
     return;
   }
 
@@ -84,36 +54,18 @@ function actualizarCuentaAtras() {
   document.getElementById("segundos").textContent = segundos;
 }
 
-actualizarCuentaAtras();
 setInterval(actualizarCuentaAtras, 1000);
+actualizarCuentaAtras();
 
-function borrarConfirmacion() {
-  localStorage.removeItem("FRANCIFAM_confirmado");
-  alert("Confirmación borrada. Ya puedes volver a probar.");
-}
 
-function controlarMusica() {
-  const musica = document.getElementById("musicaFondo");
-  const boton = document.getElementById("botonMusica");
-  
-  musica.volume = 0.10;
-
-  if (musica.paused) {
-    musica.play();
-    boton.textContent = "❚❚ Pausar";
-  } else {
-    musica.pause();
-    boton.textContent = "♫ Música";
-  }
-}
-
+// 🔥 CARRUSEL
 let indiceCarrusel = 0;
 
 function actualizarCarrusel() {
   const fotos = document.querySelectorAll(".foto-carrusel");
 
-  fotos.forEach((foto) => {
-    foto.classList.remove("activa", "anterior", "siguiente");
+  fotos.forEach(f => {
+    f.classList.remove("activa", "anterior", "siguiente");
   });
 
   const total = fotos.length;
@@ -133,21 +85,25 @@ function moverCarrusel(direccion) {
 
 actualizarCarrusel();
 
+
+// 🔥 SWIPE
 let inicioX = 0;
 let finX = 0;
 
 const carrusel = document.getElementById("carruselFotos");
 
-carrusel.addEventListener("touchstart", (e) => {
-  inicioX = e.changedTouches[0].clientX;
-});
+if (carrusel) {
+  carrusel.addEventListener("touchstart", (e) => {
+    inicioX = e.changedTouches[0].clientX;
+  });
 
-carrusel.addEventListener("touchend", (e) => {
-  finX = e.changedTouches[0].clientX;
+  carrusel.addEventListener("touchend", (e) => {
+    finX = e.changedTouches[0].clientX;
 
-  if (inicioX - finX > 40) {
-    moverCarrusel(1);
-  } else if (finX - inicioX > 40) {
-    moverCarrusel(-1);
-  }
-});
+    if (inicioX - finX > 40) {
+      moverCarrusel(1);
+    } else if (finX - inicioX > 40) {
+      moverCarrusel(-1);
+    }
+  });
+}
